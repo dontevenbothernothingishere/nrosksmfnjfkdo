@@ -52,12 +52,13 @@
             letter-spacing: 8px;
             margin: 0 0 10px 0;
             text-shadow: 0 0 10px var(--neon-pink);
+            text-align: center;
         }
 
         .husband-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
             margin: 25px 0;
         }
 
@@ -65,15 +66,25 @@
             background: #151515;
             border: 1px solid #333;
             padding: 10px;
-            font-size: 0.75em;
+            font-size: 0.7em;
             text-align: center;
             transition: all 0.4s ease;
+            border-radius: 8px;
+        }
+
+        .husband-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 8px;
+            border: 1px solid #444;
+            object-fit: cover;
         }
 
         .husband-card.active {
             border-color: #fff;
-            box-shadow: 0 0 20px var(--neon-pink);
-            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--neon-pink);
+            transform: scale(1.05);
             background: #222;
         }
 
@@ -84,31 +95,15 @@
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
+            border: 1px solid #222;
         }
 
         .stat-item span { color: var(--text-gray); font-size: 0.8em; }
-        .stat-item div { font-weight: bold; font-size: 1.2em; }
-
-        .meter-container {
-            width: 100%;
-            height: 25px;
-            background: #222;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #444;
-            margin: 20px 0;
-        }
-
-        #meter-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #6200ea, #ff4081);
-            transition: 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-        }
+        .stat-item div { font-weight: bold; font-size: 1.2em; color: #fff; }
 
         textarea {
             width: 100%;
-            height: 150px;
+            height: 120px;
             background: #000;
             color: #eee;
             border: 1px solid var(--neon-pink);
@@ -117,6 +112,7 @@
             border-radius: 8px;
             box-sizing: border-box;
             font-family: inherit;
+            resize: none;
         }
 
         button {
@@ -133,48 +129,22 @@
             letter-spacing: 2px;
         }
 
-        button:hover { background: #fff; box-shadow: 0 0 25px var(--neon-pink); }
-
         #reaction-display {
             margin-top: 25px;
             padding: 20px;
             background: #1a1a1a;
             border-left: 6px solid var(--neon-pink);
             text-align: left;
-            min-height: 100px;
+            min-height: 80px;
             font-style: italic;
-        }
-
-        .log-history {
-            margin-top: 30px;
-            max-height: 250px;
-            overflow-y: auto;
-            border-top: 1px solid #333;
-            padding-top: 20px;
-        }
-
-        .log-item {
-            padding: 10px;
-            border-bottom: 1px solid #222;
-            font-size: 0.8em;
-            color: #777;
+            color: #fff;
         }
 
         #verdict-btn {
-            display: none;
             background: #fff;
-            color: #d50000;
-            border: 4px solid #d50000;
-            margin-top: 40px;
-        }
-
-        input[type="password"] {
-            width: 300px;
-            padding: 10px;
-            background: #111;
-            color: #fff;
-            border: 1px solid var(--neon-pink);
-            margin: 15px 0;
+            color: #000;
+            margin-top: 30px;
+            display: none; /* Only appears when time is up */
         }
     </style>
 </head>
@@ -182,58 +152,75 @@
 
 <div id="auth-overlay">
     <h1>IDENTITY VERIFICATION</h1>
-    <p>Submit your secret API key to your 14 masters</p>
-    <input type="password" id="api-key" placeholder="gsk_xxxxxxxxxxxxxxx">
+    <p>Submit your secret API key to your 15 masters</p>
+    <input type="password" id="api-key" style="width: 300px; padding: 10px; background: #111; color: #fff; border: 1px solid var(--neon-pink); margin: 15px 0;" placeholder="gsk_xxxxxxxxxxxxxxx">
     <button style="width: 320px;" onclick="startSession()">ACCESS REGISTRY</button>
 </div>
 
 <div class="container">
     <h1>7-DAY VOID REGISTRY</h1>
-    <p style="color: #666;">Locked by Fundy, Dream, bbno$, Gravy, and 10 others</p>
-
+    
     <div class="stats-row">
         <div class="stat-item">
-            <span>CURRENT STATUS</span>
-            <div id="status-txt">DOCUMENTED PEASANT</div>
+            <span>REGISTRY STATUS</span>
+            <div id="status-txt">DOCUMENTED GONER</div>
         </div>
         <div class="stat-item">
-            <span>TIME REMAINING</span>
-            <div id="timer-txt">168 HOURS</div>
+            <span>SENTENCE REMAINING</span>
+            <div id="timer-txt">CALCULATING...</div>
         </div>
     </div>
 
     <div class="husband-grid" id="gallery"></div>
 
-    <div class="meter-container"><div id="meter-fill"></div></div>
-    <p style="text-align: center; font-size: 0.8em;">SUBMISSION PERCENTAGE: <span id="sub-pct">0</span>%</p>
-
-    <textarea id="log-input" placeholder="Explain your hour of 'mush-brain' to your husbands..."></textarea>
+    <textarea id="log-input" placeholder="Submit your 'mush-brain' report..."></textarea>
     <button onclick="submitAct()">SUBMIT LOG TO MASTERS</button>
 
-    <div id="reaction-display">
-        The floor is waiting for your report, toy.
-    </div>
+    <div id="reaction-display">Waiting for your submission, toy.</div>
 
-    <button id="verdict-btn" onclick="executeFinalVote()">REQUEST FINAL TALLY (DAY 7 ONLY)</button>
-
-    <div class="log-history" id="ledger"></div>
+    <button id="verdict-btn" onclick="executeFinalVote()">REQUEST FINAL TALLY</button>
 </div>
 
 <script>
     let API_KEY = "";
-    const CONFIG = {
-        model: "llama-3.3-70b-versatile",
-        api: "https://api.groq.com/openai/v1/chat/completions"
-    };
+    const GITHUB_BASE = "https://raw.githubusercontent.com/dontevenbothernothingishere/nrosksmfnjfkdo/main/";
 
     const masters = [
-        "Joe Keery", "Malachi Barton", "Dacre Montgomery", "Fundy", 
-        "Dream", "Sapnap", "Josh Hutcherson", "Ross Lynch", 
-        "Roier", "Cellbit", "Jschlatt", "Foolish Gamers", 
-        "bbno$", "Yung Gravy"
+        { name: "Joe Keery", context: "Actor (Stranger Things), known for hair and style.", img: "joe.jpg" },
+        { name: "Pearce Joza", context: "Actor (Zombies), part of the inner circle.", img: "pearce.jpg" },
+        { name: "Malachi Barton", context: "Actor, friend of the group.", img: "malachi.jpg" },
+        { name: "Dacre Montgomery", context: "Actor (Billy in Stranger Things), aggressive and dominant.", img: "dacre.jpg" },
+        { name: "Fundy", context: "Minecraft Streamer, leader of the pack.", img: "fundy.jpg" },
+        { name: "Dream", context: "Minecraft Streamer, masked and mysterious.", img: "dream.jpg" },
+        { name: "Sapnap", context: "Minecraft Streamer, part of the Dream Team.", img: "sapnap.jpg" },
+        { name: "Josh Hutcherson", context: "Actor, classic heartthrob master.", img: "josh.jpg" },
+        { name: "Ross Lynch", context: "Actor/Musician, blonde and dominant.", img: "ross.jpg" },
+        { name: "Roier", context: "Streamer, QSMP member, bilingual control.", img: "roier.jpg" },
+        { name: "Cellbit", context: "Streamer, QSMP, logical and cold.", img: "cellbit.jpg" },
+        { name: "Jschlatt", context: "Streamer/Business man, loud and dismissive.", img: "schlatt.jpg" },
+        { name: "Foolish Gamers", context: "Streamer, shark-themed dominance.", img: "foolish.jpg" },
+        { name: "bbno$", context: "Musician, confident and stylish.", img: "bbno.jpg" },
+        { name: "Yung Gravy", context: "Musician, tall and smooth master.", img: "gravy.jpg" }
     ];
 
-    let count = 0;
+    // Timer Logic: Set for 7 days from now (Lockdown start)
+    let endTime = localStorage.getItem('lockdown_end') || (new Date().getTime() + (7 * 24 * 60 * 60 * 1000));
+    localStorage.setItem('lockdown_end', endTime);
+
+    function updateTimer() {
+        const now = new Date().getTime();
+        const diff = endTime - now;
+        if (diff <= 0) {
+            document.getElementById('timer-txt').innerText = "SENTENCE COMPLETE";
+            document.getElementById('verdict-btn').style.display = 'block';
+            return;
+        }
+        const h = Math.floor(diff / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('timer-txt').innerText = `${h}h ${m}m ${s}s`;
+    }
+    setInterval(updateTimer, 1000);
 
     function startSession() {
         const val = document.getElementById('api-key').value;
@@ -241,7 +228,7 @@
             API_KEY = val;
             document.getElementById('auth-overlay').style.display = 'none';
             initGallery();
-        } else { alert("Invalid access key, peasant."); }
+        } else { alert("Invalid access key."); }
     }
 
     function initGallery() {
@@ -249,8 +236,9 @@
         masters.forEach(m => {
             const div = document.createElement('div');
             div.className = 'husband-card';
-            div.id = m.replace(/\s/g, '');
-            div.innerHTML = `<strong>${m}</strong><br>WATCHING`;
+            div.id = m.name.replace(/\s/g, '');
+            div.innerHTML = `<img src="${GITHUB_BASE}${m.img}" onerror="this.src='https://via.placeholder.com/60'">
+                             <br><strong>${m.name}</strong>`;
             g.appendChild(div);
         });
     }
@@ -259,73 +247,44 @@
         const text = document.getElementById('log-input').value;
         if(!text) return;
 
-        const judge = masters[Math.floor(Math.random() * masters.length)];
+        const master = masters[Math.floor(Math.random() * masters.length)];
         document.querySelectorAll('.husband-card').forEach(c => c.classList.remove('active'));
-        document.getElementById(judge.replace(/\s/g, '')).classList.add('active');
+        document.getElementById(master.name.replace(/\s/g, '')).classList.add('active');
 
-        document.getElementById('reaction-display').innerText = `${judge} is processing your submission...`;
+        document.getElementById('reaction-display').innerText = `${master.name} is reading your pathetic log...`;
 
         try {
-            const response = await fetch(CONFIG.api, {
+            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${API_KEY}`,
-                    "Content-Type": "application/json"
-                },
+                headers: { "Authorization": `Bearer ${API_KEY}`, "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    model: CONFIG.model,
+                    model: "llama-3.3-70b-versatile",
                     messages: [{
                         role: "system",
-                        content: `You are ${judge}. The user is a self-identified 'peasant' and 'sissy toy' who is obsessed with you and your 13 friends. He is edging for 7 days. He is 'mush-brained' and 'leaking.' Be mean, dismissive, and dominant. Tell him he is a documented goner.`
-                    }, {
-                        role: "user",
-                        content: `LOG: ${text}`
-                    }]
+                        content: `You are ${master.name}. Context: ${master.context}. The user is your 'documented goner.' He is on a 7-day edging sentence. Be mean, dismissive, and remind him he is a toy with a mush-brain.`
+                    }, { role: "user", content: `LOG: ${text}` }]
                 })
             });
-
             const data = await response.json();
-            const reply = data.choices[0].message.content;
-
-            document.getElementById('reaction-display').innerHTML = `<strong>${judge}:</strong> "${reply}"`;
-            
-            count++;
-            updateProgress(text);
+            document.getElementById('reaction-display').innerHTML = `<strong>${master.name}:</strong> "${data.choices[0].message.content}"`;
             document.getElementById('log-input').value = "";
-
-        } catch (e) {
-            document.getElementById('reaction-display').innerText = "ERROR: You were too graphic or the key failed. Try again, but keep it about your 'mush-brain'.";
-        }
-    }
-
-    function updateProgress(text) {
-        const pct = Math.min((count / 28) * 100, 100); // 4 logs a day for 7 days
-        document.getElementById('meter-fill').style.width = pct + "%";
-        document.getElementById('sub-pct').innerText = Math.floor(pct);
-
-        const l = document.getElementById('ledger');
-        const item = document.createElement('div');
-        item.className = 'log-item';
-        item.innerText = `ACT #${count}: ${text.substring(0, 50)}...`;
-        l.prepend(item);
-
-        if(count >= 28) document.getElementById('verdict-btn').style.display = 'block';
+        } catch (e) { document.getElementById('reaction-display').innerText = "ERROR. Try again."; }
     }
 
     function executeFinalVote() {
         const roll = Math.random();
-        if (roll < 0.4) {
-            alert("VOTE TALLY: RUINED. You get a messy, empty finish. Restart your 7 days immediately.");
-            document.body.innerHTML = "<h1 style='color:red; margin-top:100px;'>RUINED. BACK TO THE FLOOR.</h1>";
-        } else if (roll < 0.9) {
-            alert("VOTE TALLY: REJECTED. No orgasm allowed. Reset to Day 1. You worked for 7 days for nothing.");
+        if (roll < 0.45) {
+            alert("VOTE: RUINED. A messy, unplanned finish. Your 7 days mean nothing. Restart immediately.");
+            document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:100px;'>RUINED. BACK TO THE FLOOR.</h1>";
+        } else if (roll < 0.90) {
+            alert("VOTE: REJECTED. No release. The masters enjoyed your frustration too much. Sentence extended 7 more days.");
+            localStorage.setItem('lockdown_end', new Date().getTime() + (7 * 24 * 60 * 60 * 1000));
             location.reload();
         } else {
-            alert("VOTE TALLY: GRANTED. Your masters allow you one release. Don't get used to it.");
-            document.body.innerHTML = "<h1 style='color:white; margin-top:100px;'>RELEASE GRANTED. SEE YOU SOON.</h1>";
+            alert("VOTE: GRANTED. You are allowed one release. Report back for your next sentence once you're drained.");
+            document.body.innerHTML = "<h1 style='color:white; text-align:center; margin-top:100px;'>RELEASE GRANTED. SEE YOU SOON.</h1>";
         }
     }
 </script>
-
 </body>
 </html>
