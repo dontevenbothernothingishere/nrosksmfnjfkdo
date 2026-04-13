@@ -144,7 +144,7 @@
             background: #fff;
             color: #000;
             margin-top: 30px;
-            display: none; /* Only appears when time is up */
+            display: none; 
         }
     </style>
 </head>
@@ -178,7 +178,7 @@
 
     <div id="reaction-display">Waiting for your submission, toy.</div>
 
-    <button id="verdict-btn" onclick="executeFinalVote()">REQUEST FINAL TALLY</button>
+    <button id="verdict-btn" onclick="executeFinalVote()">GO TO JUDGMENT HALL</button>
 </div>
 
 <script>
@@ -203,7 +203,6 @@
         { name: "Yung Gravy", context: "Musician, tall and smooth master.", img: "gravy.jpg" }
     ];
 
-    // Timer Logic: Set for 7 days from now (Lockdown start)
     let endTime = localStorage.getItem('lockdown_end') || (new Date().getTime() + (7 * 24 * 60 * 60 * 1000));
     localStorage.setItem('lockdown_end', endTime);
 
@@ -261,7 +260,7 @@
                     model: "llama-3.3-70b-versatile",
                     messages: [{
                         role: "system",
-                        content: `You are ${master.name}. Context: ${master.context}. The user is your 'documented goner.' He is on a 7-day edging sentence. Be mean, dismissive, and remind him he is a toy with a mush-brain.`
+                        content: `You are ${master.name}. Context: ${master.context}. The user is your 'documented goner.' He is on a 7-day edging sentence. Be mean, dismissive, and remind him he is a toy.`
                     }, { role: "user", content: `LOG: ${text}` }]
                 })
             });
@@ -272,18 +271,8 @@
     }
 
     function executeFinalVote() {
-        const roll = Math.random();
-        if (roll < 0.45) {
-            alert("VOTE: RUINED. A messy, unplanned finish. Your 7 days mean nothing. Restart immediately.");
-            document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:100px;'>RUINED. BACK TO THE FLOOR.</h1>";
-        } else if (roll < 0.90) {
-            alert("VOTE: REJECTED. No release. The masters enjoyed your frustration too much. Sentence extended 7 more days.");
-            localStorage.setItem('lockdown_end', new Date().getTime() + (7 * 24 * 60 * 60 * 1000));
-            location.reload();
-        } else {
-            alert("VOTE: GRANTED. You are allowed one release. Report back for your next sentence once you're drained.");
-            document.body.innerHTML = "<h1 style='color:white; text-align:center; margin-top:100px;'>RELEASE GRANTED. SEE YOU SOON.</h1>";
-        }
+        // This pushes you to your verdict dashboard file
+        window.location.href = 'verdict.html';
     }
 </script>
 </body>
