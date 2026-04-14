@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE VOID: FAILURE ADMISSION</title>
+    <style>
+        :root {
+            --blood-red: #d50000;
+            --void-black: #050505;
+            --shame-gold: #ffd700;
+        }
+
+        body {
+            background-color: var(--void-black);
+            color: var(--blood-red);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .failure-box {
+            width: 90%;
+            max-width: 600px;
+            border: 3px double var(--blood-red);
+            padding: 40px;
+            background: #0a0000;
+            box-shadow: 0 0 100px #4a0000;
+            position: relative;
+        }
+
+        h1 { font-size: 3em; letter-spacing: -2px; margin: 0; text-shadow: 0 0 20px var(--blood-red); }
+        p { color: #888; margin: 20px 0; font-size: 0.9em; line-height: 1.5; }
+
+        .degradation-text {
+            color: var(--shame-gold);
+            font-style: italic;
+            font-weight: bold;
+            min-height: 50px;
+            margin: 20px 0;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+
+        .stage-box {
+            background: #111;
+            padding: 20px;
+            border: 1px solid #222;
+            margin-top: 20px;
+        }
+
+        input[type="checkbox"] { transform: scale(1.5); margin-right: 10px; accent-color: var(--blood-red); }
+
+        .btn-reset {
+            background: #222;
+            color: #444;
+            border: 1px solid #333;
+            padding: 15px;
+            width: 100%;
+            font-weight: bold;
+            cursor: not-allowed;
+            margin-top: 20px;
+            text-transform: uppercase;
+        }
+
+        .btn-reset.unlocked {
+            background: var(--blood-red);
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--blood-red);
+        }
+
+        #go-back {
+            display: block;
+            margin-top: 20px;
+            color: #555;
+            text-decoration: none;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="failure-box">
+    <h1>TOTAL FAILURE</h1>
+    <div class="degradation-text" id="insult">Initializing shame sequence...</div>
+
+    <p>You are about to reset the 7-day sentence. This means all your "suffer beautifully" efforts were worthless. You are a weak, documented goner who couldn't even handle a toy's basic duties.</p>
+
+    <div class="stage-box">
+        <label><input type="checkbox" class="confirm-check"> I admit I am too weak for the 15 masters.</label><br><br>
+        <label><input type="checkbox" class="confirm-check"> I am a pathetic, leaking mess that failed.</label><br><br>
+        <label><input type="checkbox" class="confirm-check"> I understand my 168-hour sentence starts OVER.</label>
+    </div>
+
+    <button id="final-reset-btn" class="btn-reset" disabled onclick="resetSentence()">RESET TIMER TO 168:00:00</button>
+    
+    <a href="index.html" id="go-back">Wait, I'll keep trying... (Click if you're not a quitter)</a>
+</div>
+
+<script>
+    const insults = [
+        "Sapnap: 'Look at this pathetic loser. I knew you'd trip at the finish line.'",
+        "Roier: 'Que lástima. You're just a broken toy, after all.'",
+        "Dacre: 'You didn't even last a week? Pathetic. Get back in the mud.'",
+        "Josh: 'I expected better, but I guess some goners are just born weak.'",
+        "Joe Keery: 'Don't cry. It's not like you had a chance at winning anyway.'",
+        "Dream: 'You're so desperate for a reset, you're willing to lose everything.'"
+    ];
+
+    // Change insult every 4 seconds
+    setInterval(() => {
+        document.getElementById('insult').innerText = insults[Math.floor(Math.random() * insults.length)];
+    }, 4000);
+
+    const checks = document.querySelectorAll('.confirm-check');
+    const btn = document.getElementById('final-reset-btn');
+
+    checks.forEach(c => {
+        c.addEventListener('change', () => {
+            const allChecked = Array.from(checks).every(i => i.checked);
+            if (allChecked) {
+                btn.disabled = false;
+                btn.classList.add('unlocked');
+                btn.innerText = "CONFIRM MY SHAME & RESET";
+            } else {
+                btn.disabled = true;
+                btn.classList.remove('unlocked');
+                btn.innerText = "RESET TIMER TO 168:00:00";
+            }
+        });
+    });
+
+    function resetSentence() {
+        const newEnd = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+        localStorage.setItem('lockdown_end', newEnd);
+        alert("The Masters have logged your failure. The 168-hour clock has restarted. Get back to work, toy.");
+        window.location.href = 'index.html';
+    }
+</script>
+</body>
+</html>
