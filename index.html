@@ -10,6 +10,7 @@
             --deep-purple: #311b92;
             --void-black: #050505;
             --text-gray: #b0b0b0;
+            --warning-red: #ff1744;
         }
 
         body {
@@ -129,6 +130,16 @@
             letter-spacing: 2px;
         }
 
+        #reset-btn {
+            background: var(--warning-red);
+            color: #fff;
+            padding: 10px;
+            font-size: 0.8em;
+            margin-top: 10px;
+            border-radius: 5px;
+            letter-spacing: 1px;
+        }
+
         #reaction-display {
             margin-top: 25px;
             padding: 20px;
@@ -175,6 +186,8 @@
 
     <textarea id="log-input" placeholder="Submit your 'mush-brain' report..."></textarea>
     <button onclick="submitAct()">SUBMIT LOG TO MASTERS</button>
+    
+    <button id="reset-btn" onclick="goToReset()">RESET TIMER & SELF-REPORT FAILURE</button>
 
     <div id="reaction-display">Waiting for your submission, toy.</div>
 
@@ -182,7 +195,6 @@
 </div>
 
 <script>
-    // LOAD SAVED API KEY ON STARTUP
     let API_KEY = localStorage.getItem('saved_api_key') || "";
     const GITHUB_BASE = "https://raw.githubusercontent.com/dontevenbothernothingishere/nrosksmfnjfkdo/main/";
 
@@ -204,7 +216,6 @@
         { name: "Yung Gravy", context: "Musician, tall and smooth master.", img: "gravy.jpg" }
     ];
 
-    // Check if we are already logged in
     window.onload = function() {
         if(API_KEY) {
             document.getElementById('auth-overlay').style.display = 'none';
@@ -213,7 +224,6 @@
         updateTimer();
     };
 
-    // TIMER LOGIC: Ensures it never resets unless the 7 days are actually up
     let endTime = localStorage.getItem('lockdown_end');
     if (!endTime) {
         endTime = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
@@ -239,7 +249,7 @@
         const val = document.getElementById('api-key').value;
         if(val.startsWith("gsk_")) {
             API_KEY = val;
-            localStorage.setItem('saved_api_key', API_KEY); // SAVE KEY TO CHROME
+            localStorage.setItem('saved_api_key', API_KEY);
             document.getElementById('auth-overlay').style.display = 'none';
             initGallery();
         } else { alert("Invalid access key."); }
@@ -247,7 +257,7 @@
 
     function initGallery() {
         const g = document.getElementById('gallery');
-        g.innerHTML = ""; // Clear existing
+        g.innerHTML = "";
         masters.forEach(m => {
             const div = document.createElement('div');
             div.className = 'husband-card';
@@ -256,6 +266,10 @@
                              <br><strong>${m.name}</strong>`;
             g.appendChild(div);
         });
+    }
+
+    function goToReset() {
+        window.location.href = 'failure.html';
     }
 
     async function submitAct() {
