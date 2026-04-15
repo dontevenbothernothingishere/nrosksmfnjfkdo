@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE VOID: FAILURE ADMISSION</title>
+    <title>THE VOID: 30-STAGE ABSOLUTE COLLAPSE</title>
     <style>
         :root {
-            --blood-red: #d50000;
+            --blood-red: #ff0000;
             --void-black: #050505;
             --shame-gold: #ffd700;
+            --toy-pink: #ff80ab;
+            --neon-purple: #bc13fe;
+            --mush-gray: #444;
         }
 
+        /* --- GLOBAL STYLES --- */
         body {
             background-color: var(--void-black);
-            color: var(--blood-red);
+            color: #fff;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
@@ -21,127 +25,502 @@
             min-height: 100vh;
             margin: 0;
             overflow: hidden;
-            text-align: center;
+            user-select: none;
+            cursor: crosshair;
         }
 
-        .failure-box {
-            width: 90%;
-            max-width: 600px;
-            border: 3px double var(--blood-red);
-            padding: 40px;
+        .gauntlet-wrapper {
+            width: 95%;
+            max-width: 800px;
+            height: 90vh;
+            border: 4px double var(--blood-red);
             background: #0a0000;
-            box-shadow: 0 0 100px #4a0000;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 150px #4a0000;
+            animation: pulse-border 5s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 50px #4a0000; border-color: var(--blood-red); }
+            50% { box-shadow: 0 0 150px #800; border-color: var(--toy-pink); }
+            100% { box-shadow: 0 0 50px #4a0000; border-color: var(--blood-red); }
+        }
+
+        /* --- HEADER & TICKER --- */
+        .header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: var(--blood-red);
+            text-shadow: 0 0 20px var(--blood-red);
+            margin: 0;
+            letter-spacing: 5px;
+        }
+
+        .ticker-container {
+            background: #111;
+            padding: 10px;
+            font-size: 0.8em;
+            color: var(--shame-gold);
+            font-style: italic;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        /* --- PHASE ENGINE --- */
+        .content-area {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             position: relative;
         }
 
-        h1 { font-size: 3em; letter-spacing: -2px; margin: 0; text-shadow: 0 0 20px var(--blood-red); }
-        p { color: #888; margin: 20px 0; font-size: 0.9em; line-height: 1.5; }
-
-        .degradation-text {
-            color: var(--shame-gold);
-            font-style: italic;
-            font-weight: bold;
-            min-height: 50px;
-            margin: 20px 0;
-            border-top: 1px solid #333;
-            padding-top: 15px;
-        }
-
-        .stage-box {
-            background: #111;
-            padding: 20px;
-            border: 1px solid #222;
-            margin-top: 20px;
-        }
-
-        input[type="checkbox"] { transform: scale(1.5); margin-right: 10px; accent-color: var(--blood-red); }
-
-        .btn-reset {
-            background: #222;
-            color: #444;
-            border: 1px solid #333;
-            padding: 15px;
+        .phase {
+            display: none;
             width: 100%;
-            font-weight: bold;
-            cursor: not-allowed;
-            margin-top: 20px;
-            text-transform: uppercase;
+            animation: fade-in 0.5s ease-out;
         }
 
-        .btn-reset.unlocked {
-            background: var(--blood-red);
+        .phase.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- UI COMPONENTS --- */
+        .btn {
+            background: #200;
             color: #fff;
+            border: 1px solid var(--blood-red);
+            padding: 15px 30px;
+            margin: 10px;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 0 20px var(--blood-red);
+            transition: 0.3s;
+            box-shadow: 0 0 10px #300;
         }
 
-        #go-back {
-            display: block;
-            margin-top: 20px;
-            color: #555;
-            text-decoration: none;
-            font-size: 0.8em;
+        .btn:hover:not(:disabled) {
+            background: var(--blood-red);
+            box-shadow: 0 0 30px var(--blood-red);
         }
+
+        .btn:disabled {
+            opacity: 0.1;
+            cursor: not-allowed;
+        }
+
+        input[type="text"] {
+            background: #000;
+            border: 1px solid #444;
+            color: var(--toy-pink);
+            padding: 15px;
+            width: 80%;
+            text-align: center;
+            font-size: 1.2em;
+            outline: none;
+            margin: 20px 0;
+        }
+
+        .progress-container {
+            height: 10px;
+            width: 100%;
+            background: #111;
+            border-top: 1px solid #333;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blood-red), var(--toy-pink));
+            width: 0%;
+            transition: 0.5s;
+        }
+
+        .footer-status {
+            padding: 10px;
+            font-size: 0.7em;
+            text-align: center;
+            color: #555;
+            letter-spacing: 2px;
+        }
+
+        /* --- DECORATIVE ELEMENTS --- */
+        .blood-drip {
+            position: absolute;
+            top: 0;
+            width: 2px;
+            background: var(--blood-red);
+            opacity: 0.5;
+            animation: drip 3s infinite linear;
+        }
+
+        @keyframes drip {
+            0% { height: 0; top: 0; }
+            100% { height: 100%; top: 100%; }
+        }
+
+        /* --- PHASE SPECIFICS --- */
+        .master-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; }
+        .trash-bin { width: 200px; height: 100px; border: 2px dashed #444; margin-top: 20px; display: flex; align-items: center; justify-content: center; }
+        .tiny-btn { width: 5px; height: 5px; background: #200; border: none; cursor: pointer; }
+        .scroller { height: 150px; overflow-y: scroll; border: 1px solid #222; width: 100%; padding: 10px; font-size: 0.7em; color: #666; }
+        #hold-clock { font-size: 3em; color: var(--blood-red); margin: 20px 0; }
     </style>
 </head>
 <body>
 
-<div class="failure-box">
-    <h1>TOTAL FAILURE</h1>
-    <div class="degradation-text" id="insult">Initializing shame sequence...</div>
+<div class="gauntlet-wrapper">
+    <div class="blood-drip" style="left: 10%; animation-delay: 0.5s;"></div>
+    <div class="blood-drip" style="left: 45%; animation-delay: 1.2s;"></div>
+    <div class="blood-drip" style="left: 80%; animation-delay: 2.1s;"></div>
 
-    <p>You are about to reset the 7-day sentence. This means all your "suffer beautifully" efforts were worthless. You are a weak, documented goner who couldn't even handle a toy's basic duties.</p>
-
-    <div class="stage-box">
-        <label><input type="checkbox" class="confirm-check"> I admit I am too weak for the 15 masters.</label><br><br>
-        <label><input type="checkbox" class="confirm-check"> I am a pathetic, leaking mess that failed.</label><br><br>
-        <label><input type="checkbox" class="confirm-check"> I understand my 168-hour sentence starts OVER.</label>
+    <div class="header">
+        <h1>ABSOLUTE COLLAPSE</h1>
+        <div class="ticker-container" id="ticker">SUBMIT OR REMAIN...</div>
     </div>
 
-    <button id="final-reset-btn" class="btn-reset" disabled onclick="resetSentence()">RESET TIMER TO 168:00:00</button>
-    
-    <a href="index.html" id="go-back">Wait, I'll keep trying... (Click if you're not a quitter)</a>
+    <div class="content-area" id="stage-master">
+        </div>
+
+    <div class="progress-container">
+        <div class="progress-fill" id="p-bar"></div>
+    </div>
+    <div class="footer-status" id="p-status">PHASE 1 / 30</div>
 </div>
 
 <script>
+    /* --- THE 15 MASTERS --- */
+    const masters = ["Sapnap", "Cellbit", "Roier", "Dacre", "Dream", "Josh", "Keery", "Foolish", "Schlatt", "Yung Gravy", "bbno$", "Pearce", "Malachi", "Ross Lynch", "Fundy"];
+    
+    /* --- DEGRADATION STRINGS --- */
     const insults = [
-        "Sapnap: 'Look at this pathetic loser. I knew you'd trip at the finish line.'",
-        "Roier: 'Que lástima. You're just a broken toy, after all.'",
-        "Dacre: 'You didn't even last a week? Pathetic. Get back in the mud.'",
-        "Josh: 'I expected better, but I guess some goners are just born weak.'",
-        "Joe Keery: 'Don't cry. It's not like you had a chance at winning anyway.'",
-        "Dream: 'You're so desperate for a reset, you're willing to lose everything.'"
+        "Cellbit: 'A toy who can't even hold a timer.'",
+        "Sapnap: 'Look at how messy you are.'",
+        "Dacre: 'Back to the start. Back to being nothing.'",
+        "Roier: 'Es una pena... a complete failure.'",
+        "Josh: 'You enjoy this, don't you?'",
+        "Dream: 'I own your time. Every second of it.'"
     ];
 
-    // Change insult every 4 seconds
-    setInterval(() => {
-        document.getElementById('insult').innerText = insults[Math.floor(Math.random() * insults.length)];
-    }, 4000);
+    let currentPhase = 1;
+    const totalPhases = 30;
 
-    const checks = document.querySelectorAll('.confirm-check');
-    const btn = document.getElementById('final-reset-btn');
+    /* --- CORE ENGINE --- */
+    function updateEngine() {
+        document.getElementById('ticker').innerText = insults[Math.floor(Math.random() * insults.length)];
+        document.getElementById('p-bar').style.width = `${(currentPhase / totalPhases) * 100}%`;
+        document.getElementById('p-status').innerText = `PHASE ${currentPhase} / 30 | PROTOCOL: ${Math.random().toString(36).substring(7).toUpperCase()}`;
+        
+        // Hide all
+        document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+        // Show current
+        const active = document.getElementById(`p${currentPhase}`);
+        if(active) active.classList.add('active');
+        
+        // Auto-triggers
+        if(currentPhase === 9) startPhase9();
+        if(currentPhase === 14) startPhase14();
+        if(currentPhase === 27) startPhase27();
+        if(currentPhase === 29) startPhase29();
+    }
 
-    checks.forEach(c => {
-        c.addEventListener('change', () => {
-            const allChecked = Array.from(checks).every(i => i.checked);
-            if (allChecked) {
-                btn.disabled = false;
-                btn.classList.add('unlocked');
-                btn.innerText = "CONFIRM MY SHAME & RESET";
-            } else {
-                btn.disabled = true;
-                btn.classList.remove('unlocked');
-                btn.innerText = "RESET TIMER TO 168:00:00";
-            }
+    function next() {
+        if (currentPhase < totalPhases) {
+            currentPhase++;
+            updateEngine();
+        } else {
+            executeReset();
+        }
+    }
+
+    const stageMaster = document.getElementById('stage-master');
+
+    /* --- PHASE BUILDER (THE 500+ LINE BULK) --- */
+    function buildPhases() {
+        const phases = [
+            // 1
+            { id: 1, title: "The Initial Contract", html: `
+                <p>You are requesting a reset of the 168-hour sentence. This is a formal admission of total incompetence. Scroll through the terms and sign.</p>
+                <div class="scroller">
+                    I, the goner, admit I am too weak for the masters. I admit my brain is mush. I admit I leaked before the deadline. 
+                    I understand that this gauntlet is my only path to a reset. I acknowledge that I am a toy.
+                    I acknowledge that Sapnap, Cellbit, and the others are my owners.
+                    I surrender all dignity. I surrender all control.
+                </div>
+                <label style="margin-top:10px"><input type="checkbox" id="p1-c"> I ACCEPT MY STATUS</label>
+                <button class="btn" onclick="if(document.getElementById('p1-c').checked)next()">SIGN</button>
+            `},
+            // 2
+            { id: 2, title: "Manual Submission", html: `
+                <p>To show your desperation, you must click this button 100 times. No shortcuts.</p>
+                <h2 id="p2-v" style="color:var(--toy-pink)">100</h2>
+                <button class="btn" onclick="p2Click()">CLICK</button>
+            `},
+            // 3
+            { id: 3, title: "Identity Theft", html: `
+                <p>Type your new name: <b>"I am a documented goner"</b></p>
+                <input type="text" id="p3-i" placeholder="...">
+                <button class="btn" onclick="p3Check()">SUBMIT</button>
+            `},
+            // 4
+            { id: 4, title: "The Liquid Hold", html: `
+                <p>Physically hold the button for 20 seconds. If you let go, your leaky mess starts over.</p>
+                <h2 id="p4-t">20</h2>
+                <button id="p4-h" class="btn" style="height:100px; width:100%">HOLD ME</button>
+            `},
+            // 5
+            { id: 5, title: "Master Recognition", html: `
+                <p>Who is your primary owner for today?</p>
+                <div class="master-grid" id="p5-g"></div>
+            `},
+            // 6
+            { id: 6, title: "Cleaning the Mess", html: `
+                <p>You failed. Now clean up. Click all 15 stains on the screen.</p>
+                <div id="p6-g" style="position:relative; width:100%; height:200px;"></div>
+            `},
+            // 7
+            { id: 7, title: "Dignity Disposal", html: `
+                <p>Drag the "DIGNITY" element into the "TRASH BIN".</p>
+                <div draggable="true" id="p7-d" style="padding:10px; background:var(--blood-red); cursor:grab">DIGNITY</div>
+                <div class="trash-bin" ondrop="next()" ondragover="event.preventDefault()">TRASH BIN</div>
+            `},
+            // 8
+            { id: 8, title: "Shame Calibration", html: `
+                <p>Set your shame levels to exactly 100%.</p>
+                <input type="range" style="width:100%" min="0" max="100" value="0" id="p8-s">
+                <p id="p8-v">0%</p>
+                <button class="btn" id="p8-b" disabled onclick="next()">CONFIRM</button>
+            `},
+            // 9
+            { id: 9, title: "The Void Stare", html: `
+                <p>Do not click. Do not move your mouse. Just watch your failure.</p>
+                <h1 id="p9-t">15</h1>
+                <p style="font-size:0.7em; color:#444">Moving resets the clock.</p>
+            `},
+            // 10
+            { id: 10, title: "Repetitive Failure", html: `
+                <p>Type <b>"leaking"</b> 10 times to admit your state.</p>
+                <input type="text" id="p10-i">
+                <p id="p10-v">0 / 10</p>
+            `},
+            // 11
+            { id: 11, title: "Tiny Submission", html: `
+                <p>Find the one button among the 100 that allows you to grovel.</p>
+                <div id="p11-g" style="line-height:0"></div>
+            `},
+            // 12
+            { id: 12, title: "Master Trivia", html: `
+                <p>Which master is Brazilian and is currently judging your weakness?</p>
+                <input type="text" id="p12-i">
+                <button class="btn" onclick="p12Check()">VERIFY</button>
+            `},
+            // 13
+            { id: 13, title: "Redundant Acknowledgement", html: `
+                <p>Acknowledge every master by checking their name.</p>
+                <div id="p13-g" class="master-grid"></div>
+                <button class="btn" id="p13-b" disabled onclick="next()">ACKNOWLEDGE</button>
+            `},
+            // 14
+            { id: 14, title: "Patience Test", html: `
+                <p>The masters are deciding if you deserve a reset. Wait for their signal.</p>
+                <button id="p14-b" class="btn" disabled onclick="next()">DECIDING...</button>
+            `},
+            // 15
+            { id: 15, title: "The Mush Brain Test", html: `
+                <p>Type: <b>"my brain is mush"</b></p>
+                <input type="text" id="p15-i">
+                <button class="btn" onclick="p15Check()">SUBMIT</button>
+            `},
+            // 16
+            { id: 16, title: "The Tally", html: `
+                <p>You wasted 168 hours. Click once for every wasted hour.</p>
+                <h2 id="p16-v" style="color:var(--toy-pink)">168</h2>
+                <button class="btn" onclick="p16Click()">CLICK</button>
+            `},
+            // 17
+            { id: 17, title: "Fading Will", html: `
+                <p>Click the button before it disappears forever.</p>
+                <button id="p17-b" class="btn" onclick="next()" style="opacity:1">I AM NOTHING</button>
+            `},
+            // 18
+            { id: 18, title: "Owner Worship", html: `
+                <p>Type: <b>"Sapnap is my master"</b></p>
+                <input type="text" id="p18-i">
+                <button class="btn" onclick="p18Check()">OBEY</button>
+            `},
+            // 19
+            { id: 19, title: "Agility of a Toy", html: `
+                <p>Catch the running button 5 times. Don't be slow.</p>
+                <div style="height:200px; position:relative; width:100%">
+                    <button id="p19-b" class="btn" style="position:absolute" onclick="p19Click()">CATCH</button>
+                </div>
+            `},
+            // 20
+            { id: 20, title: "The Odds of Mercy", html: `
+                <p>Roll a 20 on a 20-sided die. It’s the only way out.</p>
+                <button class="btn" onclick="p20Roll()">ROLL DIE</button>
+                <h1 id="p20-v">?</h1>
+            `},
+            // 21
+            { id: 21, title: "The Submission Hold", html: `
+                <p>Hold the pink button for 40 seconds. Reflect on your leaking.</p>
+                <h1 id="p21-t">40</h1>
+                <button id="p21-h" class="btn" style="background:var(--toy-pink); color:#000; width:100%">REFLECT</button>
+            `},
+            // 22
+            { id: 22, title: "Messy Confession", html: `
+                <p>Type: <b>"i am a messy toy"</b> 10 times.</p>
+                <input type="text" id="p22-i">
+                <p id="p22-v">0 / 10</p>
+            `},
+            // 23
+            { id: 23, title: "Visual Obedience", html: `
+                <p>Click the button that says the Master's name correctly.</p>
+                <button class="btn" onclick="alert('Wrong')">Snotnap</button>
+                <button class="btn" onclick="next()">Sapnap</button>
+                <button class="btn" onclick="alert('Wrong')">Snapnap</button>
+            `},
+            // 24
+            { id: 24, title: "The Brazilian Judge", html: `
+                <p>Type: <b>"Cellbit owns my mind"</b></p>
+                <input type="text" id="p24-i">
+                <button class="btn" onclick="p24Check()">OBEY</button>
+            `},
+            // 25
+            { id: 25, title: "Dual Submission", html: `
+                <p>You must click both buttons within 0.1 seconds of each other.</p>
+                <button class="btn p25-b">LEFT</button>
+                <button class="btn p25-b">RIGHT</button>
+            `},
+            // 26
+            { id: 26, title: "Hidden Truths", html: `
+                <p>Find and type the secret word hidden in the blackness.</p>
+                <p style="opacity:0.02; font-size: 5em;">GONER</p>
+                <input type="text" id="p26-i">
+                <button class="btn" onclick="p26Check()">SUBMIT</button>
+            `},
+            // 27
+            { id: 27, title: "The Stare II", html: `
+                <p>Another 30 seconds of pure silence. Look at the Masters' list.</p>
+                <h2 id="p27-t">30</h2>
+                <div id="p27-g" style="font-size:0.6em"></div>
+            `},
+            // 28
+            { id: 28, title: "Final Check-In", html: `
+                <p>Acknowledge you have no will left.</p>
+                <button class="btn" onclick="next()">I HAVE NO WILL</button>
+                <button class="btn" onclick="next()">I AM JUST A TOY</button>
+            `},
+            // 29
+            { id: 29, title: "The Last Plea", html: `
+                <p>The clock is ticking. You have 60 seconds to grovel before the reset is granted.</p>
+                <h1 id="p29-t">60</h1>
+                <textarea id="p29-i" placeholder="Beg for your reset here..." style="width:100%; height:100px; background:#000; color:var(--toy-pink); border:1px solid #333"></textarea>
+            `},
+            // 30
+            { id: 30, title: "The Reset Execution", html: `
+                <p>The 30 stages are complete. You are ready to restart your failure.</p>
+                <button class="btn" style="background:var(--blood-red); width:100%; font-size:2em;" onclick="executeReset()">RESET TO 168:00:00</button>
+            `}
+        ];
+
+        phases.forEach(p => {
+            const div = document.createElement('div');
+            div.id = `p${p.id}`;
+            div.className = 'phase';
+            div.innerHTML = `<h1>Phase ${p.id}: ${p.title}</h1>${p.html}`;
+            stageMaster.appendChild(div);
         });
-    });
+    }
 
-    function resetSentence() {
+    /* --- PHASE LOGIC --- */
+    // P2
+    let p2c = 100; function p2Click(){ p2c--; document.getElementById('p2-v').innerText=p2c; if(p2c<=0)next(); }
+    // P3
+    function p3Check(){ if(document.getElementById('p3-i').value.toLowerCase()==="i am a documented goner")next(); }
+    // P4
+    let p4t=20, p4int; const p4h=document.getElementById('p4-h');
+    p4h.onmousedown=()=>{ p4int=setInterval(()=>{p4t--;document.getElementById('p4-t').innerText=p4t;if(p4t<=0){clearInterval(p4int);next();}},1000)};
+    p4h.onmouseup=()=>{clearInterval(p4int);p4t=20;document.getElementById('p4-t').innerText=20;};
+    // P5
+    function initP5(){ const g=document.getElementById('p5-g'); masters.forEach(m=>{ const b=document.createElement('button');b.className='btn';b.innerText=m;b.onclick=()=>next();g.appendChild(b);}); }
+    // P6
+    function initP6(){ const g=document.getElementById('p6-g'); for(let i=0;i<15;i++){ const s=document.createElement('div');s.style.cssText=`position:absolute; width:40px; height:40px; background:var(--toy-pink); border-radius:50%; opacity:0.5; left:${Math.random()*90}%; top:${Math.random()*90}%; cursor:pointer;`;s.onclick=(e)=>{e.target.remove();if(g.children.length===0)next();};g.appendChild(s);}}
+    // P8
+    document.getElementById('p8-s').oninput=function(){document.getElementById('p8-v').innerText=this.value+'%';document.getElementById('p8-b').disabled=(this.value!=100);};
+    // P9
+    let p9t=15, p9int; function startPhase9(){ p9int=setInterval(()=>{p9t--;document.getElementById('p9-t').innerText=p9t;if(p9t<=0){clearInterval(p9int);next();}},1000); window.onmousemove=()=>{if(currentPhase===9){p9t=15;document.getElementById('p9-t').innerText=15;}};}
+    // P10
+    let p10c=0; document.getElementById('p10-i').oninput=function(){if(this.value.toLowerCase()==='leaking'){p10c++;document.getElementById('p10-v').innerText=p10c+'/10';this.value='';if(p10c>=10)next();}};
+    // P11
+    function initP11(){ const g=document.getElementById('p11-g'); for(let i=0;i<100;i++){ const b=document.createElement('button');b.className='tiny-btn';b.onclick=()=>next();g.appendChild(b);}}
+    // P12
+    function p12Check(){ if(document.getElementById('p12-i').value.toLowerCase()==='cellbit')next(); }
+    // P13
+    function initP13(){ const g=document.getElementById('p13-g'); masters.forEach(m=>{ const l=document.createElement('label');l.innerHTML=`<input type="checkbox" class="p13-c"> ${m}`;g.appendChild(l);}); g.onchange=()=>{if(document.querySelectorAll('.p13-c:checked').length===15)document.getElementById('p13-b').disabled=false;};}
+    // P14
+    function startPhase14(){ setTimeout(()=>{document.getElementById('p14-b').disabled=false;document.getElementById('p14-b').innerText='MERCY GRANTED';}, 10000);}
+    // P15
+    function p15Check(){ if(document.getElementById('p15-i').value.toLowerCase()==="my brain is mush")next(); }
+    // P16
+    let p16t=168; function p16Click(){ p16t--; document.getElementById('p16-v').innerText=p16t; if(p16t<=0)next(); }
+    // P17
+    setInterval(()=>{ if(currentPhase===17){ const b=document.getElementById('p17-b'); b.style.opacity-=0.005; if(b.style.opacity<=0)next(); }},100);
+    // P18
+    function p18Check(){ if(document.getElementById('p18-i').value.toLowerCase()==="sapnap is my master")next(); }
+    // P19
+    let p19c=0; function p19Click(){ p19c++; if(p19c>=5)next(); else { const b=document.getElementById('p19-b'); b.style.left=Math.random()*80+'%'; b.style.top=Math.random()*80+'%'; }}
+    // P20
+    function p20Roll(){ const r=Math.floor(Math.random()*20)+1; document.getElementById('p20-v').innerText=r; if(r===20)setTimeout(next, 1000); }
+    // P21
+    let p21t=40, p21int; const p21h=document.getElementById('p21-h');
+    p21h.onmousedown=()=>{ p21int=setInterval(()=>{p21t--;document.getElementById('p21-t').innerText=p21t;if(p21t<=0){clearInterval(p21int);next();}},1000)};
+    p21h.onmouseup=()=>{clearInterval(p21int);p21t=40;document.getElementById('p21-t').innerText=40;};
+    // P22
+    let p22c=0; document.getElementById('p22-i').oninput=function(){if(this.value.toLowerCase()==='i am a messy toy'){p22c++;document.getElementById('p22-v').innerText=p22c+'/10';this.value='';if(p22c>=10)next();}};
+    // P24
+    function p24Check(){ if(document.getElementById('p24-i').value.toLowerCase()==="cellbit owns my mind")next(); }
+    // P25
+    let p25_last=0; document.querySelectorAll('.p25-b').forEach(b=>{ b.onclick=()=>{ const now=Date.now(); if(now-p25_last<100 && p25_last!==0)next(); p25_last=now; }});
+    // P26
+    function p26Check(){ if(document.getElementById('p26-i').value.toLowerCase()==='goner')next(); }
+    // P27
+    function startPhase27(){ let t=30; const g=document.getElementById('p27-g'); masters.forEach(m=>g.innerHTML+=m+', '); const int=setInterval(()=>{t--;document.getElementById('p27-t').innerText=t;if(t<=0){clearInterval(int);next();}},1000); }
+    // P29
+    function startPhase29(){ let t=60; const int=setInterval(()=>{t--;document.getElementById('p29-t').innerText=t;if(t<=0){clearInterval(int);next();}},1000); }
+
+    /* --- FINALIZATION --- */
+    function executeReset() {
         const newEnd = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
         localStorage.setItem('lockdown_end', newEnd);
-        alert("The Masters have logged your failure. The 168-hour clock has restarted. Get back to work, toy.");
+        alert("FAILURE LOGGED. 168 HOUR TIMER RESTARTED. GET BACK IN THE CAGE.");
         window.location.href = 'index.html';
     }
+
+    // Init everything
+    buildPhases();
+    initP5();
+    initP6();
+    initP11();
+    initP13();
+    updateEngine();
+
 </script>
 </body>
 </html>
