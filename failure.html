@@ -182,321 +182,282 @@
         <div class="ticker" id="ticker-msg">WAITING FOR SUBMISSION...</div>
     </div>
 
-    <div id="content-area">
-        <div class="stage active" id="stage-1">
-            <h2>STAGE 1: THE CONTRACT</h2>
-            <p>You have failed. You are a leaky toy. Admit it to start.</p>
-            <div style="height: 100px; overflow-y: scroll; border: 1px solid #444; margin: 20px; padding: 10px; text-align: left; font-size: 0.8rem;">
-                I admit that I am a documented goner. I admit that my 168-hour timer was broken because I have no self-control. 
-                I hereby surrender my freedom for another 7 days. I am the property of the Masters: Sapnap, Cellbit, and the rest.
-                I will grovel through 30 stages of shame to earn my reset. I am a messy, mush-brained toy.
-            </div>
-            <label><input type="checkbox" id="check-1"> I AGREE TO BE DEGRADED</label>
-            <button class="btn" onclick="if(document.getElementById('check-1').checked) next()">SIGN</button>
-        </div>
-
-        <div class="stage" id="stage-2">
-            <h2>STAGE 2: MANUAL GROVEL</h2>
-            <p>Click the button 100 times to show your desperation.</p>
-            <h1 id="count-2">100</h1>
-            <button class="btn" onclick="stage2Click()">CLICK</button>
-        </div>
-
-        <div class="stage" id="stage-3">
-            <h2>STAGE 3: IDENTITY ERASURE</h2>
-            <p>Type your new legal name: <br><b>"I am a documented goner"</b></p>
-            <input type="text" id="input-3" autocomplete="off">
-            <button class="btn" onclick="stage3Check()">SUBMIT</button>
-        </div>
-
-        <div class="stage" id="stage-4">
-            <h2>STAGE 4: THE LEAK HOLD</h2>
-            <p>Physically hold the button for 20 seconds. If you let go, you fail.</p>
-            <h1 id="time-4" class="timer-big">20</h1>
-            <button id="hold-4" class="btn" style="width: 100%; height: 100px;">HOLD ME</button>
-        </div>
-
-        <div class="stage" id="stage-5">
-            <h2>STAGE 5: OWNER RECOGNITION</h2>
-            <p>Which Master do you belong to right now?</p>
-            <div class="master-grid" id="grid-5"></div>
-        </div>
-
-        <div class="stage" id="stage-6">
-            <h2>STAGE 6: CLEANING UP</h2>
-            <p>Click the 15 messy stains on your screen.</p>
-            <div id="stains-6" style="position: relative; width: 100%; height: 300px; border: 1px solid #333;"></div>
-        </div>
-
-        <div class="stage" id="stage-7">
-            <h2>STAGE 7: DIGNITY DISPOSAL</h2>
-            <p>Drag the 'DIGNITY' to the 'TRASH'.</p>
-            <div draggable="true" id="drag-7" style="background: red; padding: 20px; margin: 20px;">DIGNITY</div>
-            <div id="drop-7" style="border: 5px dashed #555; padding: 50px;">TRASH BIN</div>
-        </div>
-
-        <div class="stage" id="stage-8">
-            <h2>STAGE 8: SHAME CALIBRATION</h2>
-            <p>Slide the meter to 100% SHAME.</p>
-            <input type="range" id="range-8" min="0" max="100" value="0" style="width: 100%;">
-            <h1 id="val-8">0%</h1>
-            <button class="btn" id="btn-8" disabled onclick="next()">CONFIRM</button>
-        </div>
-
-        <div class="stage" id="stage-9">
-            <h2>STAGE 9: THE VOID STARE</h2>
-            <p>Don't move your mouse. Don't click. Stare for 15 seconds.</p>
-            <h1 id="time-9" class="timer-big">15</h1>
-        </div>
-
-        <div class="stage" id="stage-10">
-            <h2>STAGE 10: REPETITION</h2>
-            <p>Type <b>"leaking"</b> 10 times.</p>
-            <input type="text" id="input-10" autocomplete="off">
-            <h2 id="count-10">0 / 10</h2>
-        </div>
-
-        <div class="stage" id="stage-11">
-            <h2>STAGE 11: TINY GROVEL</h2>
-            <p>Find the one dot that grants mercy.</p>
-            <div class="tiny-dots" id="dots-11"></div>
-        </div>
-
-        <div class="stage" id="stage-12">
-            <h2>STAGE 12: MASTER TRIVIA</h2>
-            <p>Who is the Brazilian Master?</p>
-            <input type="text" id="input-12">
-            <button class="btn" onclick="if(document.getElementById('input-12').value.toLowerCase().includes('cellbit')) next()">ANSWER</button>
-        </div>
-
-        <div class="stage" id="stage-13">
-            <h2>STAGE 13: THE TALLY</h2>
-            <p>168 clicks for 168 wasted hours.</p>
-            <h1 id="count-13">168</h1>
-            <button class="btn" onclick="stage13Click()">CLICK</button>
-        </div>
-
-        <div class="stage" id="stage-14">
-            <h2>STAGE 14: PATIENCE</h2>
-            <p>Wait for the Master's permission.</p>
-            <h1 id="time-14">WAITING...</h1>
-        </div>
-
-        <div class="stage" id="stage-15">
-            <h2>STAGE 15: BRAIN MUSH</h2>
-            <p>Type: <b>"my brain is mush"</b></p>
-            <input type="text" id="input-15">
-            <button class="btn" onclick="if(document.getElementById('input-15').value.toLowerCase()==='my brain is mush') next()">OBEY</button>
-        </div>
-
-        <div class="stage" id="stage-16">
-            <h2>STAGE 16: OWNER WORSHIP</h2>
-            <p>Type: <b>"Sapnap is my master"</b></p>
-            <input type="text" id="input-16">
-            <button class="btn" onclick="if(document.getElementById('input-16').value.toLowerCase()==='sapnap is my master') next()">OBEY</button>
-        </div>
-
-        <div class="stage" id="stage-17">
-            <h2>STAGE 17: FADING WILL</h2>
-            <p>Click the button before it disappears.</p>
-            <button id="btn-17" class="btn" onclick="next()" style="opacity: 1;">I AM TRASH</button>
-        </div>
-
-        <div class="stage" id="stage-18">
-            <h2>STAGE 18: THE ROSTER</h2>
-            <p>Acknowledge all 15 Masters.</p>
-            <div id="grid-18" class="master-grid"></div>
-            <button class="btn" id="btn-18" disabled onclick="next()">PROCEED</button>
-        </div>
-
-        <div class="stage" id="stage-19">
-            <h2>STAGE 19: CATCH THE TOY</h2>
-            <p>Catch the moving button 5 times.</p>
-            <div style="height: 200px; width: 100%; position: relative;">
-                <button id="btn-19" class="btn" style="position: absolute;" onclick="stage19Click()">CATCH</button>
-            </div>
-        </div>
-
-        <div class="stage" id="stage-20">
-            <h2>STAGE 20: LUCK</h2>
-            <p>Roll a 20 to proceed.</p>
-            <button class="btn" onclick="roll20()">ROLL</button>
-            <h1 id="val-20">?</h1>
-        </div>
-
-        <div class="stage" id="stage-21">
-            <h2>STAGE 21: LONG HOLD</h2>
-            <p>Hold for 40 seconds. Reflect on your leaking.</p>
-            <h1 id="time-21" class="timer-big">40</h1>
-            <button id="hold-21" class="btn" style="width: 100%; height: 100px; background: pink; color: black;">SUBMIT</button>
-        </div>
-
-        <div class="stage" id="stage-22">
-            <h2>STAGE 22: MESSY ADMISSION</h2>
-            <p>Type <b>"i am a messy toy"</b> 10 times.</p>
-            <input type="text" id="input-22">
-            <h2 id="count-22">0 / 10</h2>
-        </div>
-
-        <div class="stage" id="stage-23">
-            <h2>STAGE 23: THE CHOICE</h2>
-            <p>What are you?</p>
-            <button class="btn" onclick="alert('Liar')">Human</button>
-            <button class="btn" onclick="next()">A Documented Goner</button>
-        </div>
-
-        <div class="stage" id="stage-24">
-            <h2>STAGE 24: MEMORY TEST</h2>
-            <p>Who said 'Focus, toy' at the start?</p>
-            <input type="text" id="input-24">
-            <button class="btn" onclick="if(document.getElementById('input-24').value.toLowerCase().includes('cellbit')) next()">SUBMIT</button>
-        </div>
-
-        <div class="stage" id="stage-25">
-            <h2>STAGE 25: DOUBLE CLICK</h2>
-            <p>Click both buttons within 0.1s.</p>
-            <button class="btn p25">LEFT</button>
-            <button class="btn p25">RIGHT</button>
-        </div>
-
-        <div class="stage" id="stage-26">
-            <h2>STAGE 26: HIDDEN</h2>
-            <p>Type the hidden word.</p>
-            <h1 style="opacity: 0.01;">GONER</h1>
-            <input type="text" id="input-26">
-            <button class="btn" onclick="if(document.getElementById('input-26').value.toLowerCase()==='goner') next()">UNVEIL</button>
-        </div>
-
-        <div class="stage" id="stage-27">
-            <h2>STAGE 27: FINAL STARE</h2>
-            <p>30 seconds of pure silence.</p>
-            <h1 id="time-27" class="timer-big">30</h1>
-        </div>
-
-        <div class="stage" id="stage-28">
-            <h2>STAGE 28: TOTAL DEFEAT</h2>
-            <p>Accept your fate.</p>
-            <button class="btn" onclick="next()">I HAVE NO WILL</button>
-        </div>
-
-        <div class="stage" id="stage-29">
-            <h2>STAGE 29: THE PLEA</h2>
-            <p>Beg for your reset (60s).</p>
-            <h1 id="time-29">60</h1>
-            <textarea placeholder="Masters, please..."></textarea>
-        </div>
-
-        <div class="stage" id="stage-30">
-            <h2>STAGE 30: THE RESET</h2>
-            <p>You have finished the gauntlet. Restart your shame.</p>
-            <button class="btn" style="background: red; font-size: 2rem;" onclick="finalReset()">RESET 168 HOURS</button>
-        </div>
-
+<div id="content-area">
+    <div class="stage active" id="stage-1">
+        <h2>STAGE 1: THE TOILET CONTRACT</h2>
+        <p>You failed. Admit your status to begin your 30-stage descent.</p>
+        <button class="btn" onclick="next()">I AM A DOCUMENTED GONER</button>
     </div>
 
-    <div class="progress-tray">
-        <div id="progress-fill"></div>
+    <div class="stage" id="stage-2">
+        <h2>STAGE 2: PISS ABSORPTION</h2>
+        <p>Click the diaper 150 times. Feel it getting heavier.</p>
+        <h1 id="count-2">150</h1>
+        <button class="btn" onclick="stage2Click()">FILL DIAPER</button>
     </div>
-    <div class="footer-info" id="footer-text">PHASE 1 / 30</div>
+
+    <div class="stage" id="stage-3">
+        <h2>STAGE 3: CHASTITY LOCK</h2>
+        <p>Type: <b>"locked and leaked"</b></p>
+        <input type="text" id="input-3">
+        <button class="btn" onclick="if(val(3)=='locked and leaked') next()">LOCK</button>
+    </div>
+
+    <div class="stage" id="stage-4">
+        <h2>STAGE 4: THE LEAK HOLD</h2>
+        <p>Hold for 20s. If you let go, the p*ss overflows.</p>
+        <h1 id="time-4" class="timer-big">20</h1>
+        <button id="hold-4" class="btn">ABSORB</button>
+    </div>
+
+    <div class="stage" id="stage-5">
+        <h2>STAGE 5: MASTER SELECTION</h2>
+        <p>Which MAGA master owns your s*ssy soul today?</p>
+        <div class="master-grid" id="grid-5"></div>
+    </div>
+
+    <div class="stage" id="stage-6">
+        <h2>STAGE 6: BOOT CLEANING</h2>
+        <p>Click the 20 spots of dirt on Master's boots.</p>
+        <div id="stains-6" style="position:relative; height:300px; background:#111;"></div>
+    </div>
+
+    <div class="stage" id="stage-7">
+        <h2>STAGE 7: DIGNITY DISPOSAL</h2>
+        <p>Drag your 'LEFTIST RIGHTS' into the furnace.</p>
+        <div draggable="true" id="drag-7" style="background:red; padding:10px;">RIGHTS</div>
+        <div id="drop-7" style="border:5px dashed orange; height:100px; margin-top:20px;">FURNACE</div>
+    </div>
+
+    <div class="stage" id="stage-8">
+        <h2>STAGE 8: ARMPIT WORSHIP</h2>
+        <p>Type <b>"inhale"</b> 15 times to worship the master's scent.</p>
+        <h2 id="count-8">0 / 15</h2>
+        <input type="text" id="input-8">
+    </div>
+
+    <div class="stage" id="stage-9">
+        <h2>STAGE 9: THE VOID STARE</h2>
+        <p>Don't move. Don't blink. Be a good footstool.</p>
+        <h1 id="time-9" class="timer-big">15</h1>
+    </div>
+
+    <div class="stage" id="stage-10">
+        <h2>STAGE 10: TOILET TRAINING</h2>
+        <p>Type <b>"swallow"</b> every time the master p*sses.</p>
+        <h1 id="count-10">0 / 20</h1>
+        <input type="text" id="input-10">
+    </div>
+
+    <div class="stage" id="stage-11">
+        <h2>STAGE 11: FINDOM TAX</h2>
+        <p>Click to drain your bank account. You don't need cash in a cage.</p>
+        <h1 id="val-11">$1000.00</h1>
+        <button class="btn" onclick="drain(11)">PAY MASTER</button>
+    </div>
+
+    <div class="stage" id="stage-12">
+        <h2>STAGE 12: FEMINIZATION</h2>
+        <p>Type: <b>"I am a pretty s*ssy for my masters"</b></p>
+        <input type="text" id="input-12">
+        <button class="btn" onclick="if(val(12).includes('pretty')) next()">OBEY</button>
+    </div>
+
+    <div class="stage" id="stage-13">
+        <h2>STAGE 13: 168-HOUR PENANCE</h2>
+        <p>Click 168 times for every hour you wasted.</p>
+        <h1 id="count-13">168</h1>
+        <button class="btn" onclick="dec(13)">CLICK</button>
+    </div>
+
+    <div class="stage" id="stage-14">
+        <h2>STAGE 14: KNOTTING PREP</h2>
+        <p>Hold for 30s while Master Dream gets ready.</p>
+        <h1 id="time-14" class="timer-big">30</h1>
+        <button id="hold-14" class="btn">STAY STILL</button>
+    </div>
+
+    <div class="stage" id="stage-15">
+        <h2>STAGE 15: MUSCLE WORSHIP</h2>
+        <p>Hover over the muscles to worship the MAGA strength.</p>
+        <h1 id="count-15">50</h1>
+        <div id="flex-15" style="width:100%; height:150px; background: url('muscle_placeholder.png');"></div>
+    </div>
+
+    <div class="stage" id="stage-16">
+        <h2>STAGE 16: EATING ASS</h2>
+        <p>Type <b>"lick"</b> 20 times. Don't stop.</p>
+        <h2 id="count-16">0 / 20</h2>
+        <input type="text" id="input-16">
+    </div>
+
+    <div class="stage" id="stage-17">
+        <h2>STAGE 17: PUBLIC SHAME</h2>
+        <p>Click the 'POST DIAPER PHOTO' button before your courage fails.</p>
+        <button id="btn-17" class="btn" onclick="next()">POST TO PUBLIC</button>
+    </div>
+
+    <div class="stage" id="stage-18">
+        <h2>STAGE 18: RIM TRAINING</h2>
+        <p>Move mouse in circles to rim your owner.</p>
+        <h1 id="count-18">40</h1>
+        <div id="circle-18" style="width:150px; height:150px; border:5px solid brown; border-radius:50%;"></div>
+    </div>
+
+    <div class="stage" id="stage-19">
+        <h2>STAGE 19: PET PLAY</h2>
+        <p>Type: <b>"woof woof master"</b></p>
+        <input type="text" id="input-19">
+        <button class="btn" onclick="if(val(19).includes('woof')) next()">BARK</button>
+    </div>
+
+    <div class="stage" id="stage-20">
+        <h2>STAGE 20: THE RESET PLEA</h2>
+        <p>Beg Master Schlatt for your reset. Type 100 characters.</p>
+        <textarea id="area-20" oninput="if(this.value.length>100) next()"></textarea>
+    </div>
+
+    <div class="stage" id="stage-21">
+        <h2>STAGE 21: PISS SOAKED</h2>
+        <p>Your diaper is 100% full. Admit it.</p>
+        <button class="btn" onclick="next()">I AM SOAKED AND PATHETIC</button>
+    </div>
+
+    <div class="stage" id="stage-22">
+        <h2>STAGE 22: MUSH BRAIN TEST</h2>
+        <p>What is 0 + 0? (Your brain's value)</p>
+        <input type="text" id="input-22">
+        <button class="btn" onclick="if(val(22)=='0') next()">CONFIRM</button>
+    </div>
+
+    <div class="stage" id="stage-23">
+        <h2>STAGE 23: FINDOM TOTAL DRAIN</h2>
+        <p>Hand over your last $1.00.</p>
+        <button class="btn" onclick="next()">SEND LAST DOLLAR</button>
+    </div>
+
+    <div class="stage" id="stage-24">
+        <h2>STAGE 24: THE KNOT</h2>
+        <p>Take it. Hold for 40 seconds.</p>
+        <h1 id="time-24" class="timer-big">40</h1>
+        <button id="hold-24" class="btn" style="background:pink;">TAKE IT</button>
+    </div>
+
+    <div class="stage" id="stage-25">
+        <h2>STAGE 25: THE FINAL RIM</h2>
+        <p>One last circle for Master Cellbit.</p>
+        <h1 id="count-25">30</h1>
+        <div id="circle-25" style="width:150px; height:150px; border:5px solid #500; border-radius:50%;"></div>
+    </div>
+
+    <div class="stage" id="stage-26">
+        <h2>STAGE 26: EDGING PEAK</h2>
+        <p>Don't touch. Just watch the timer.</p>
+        <h1 id="time-26" class="timer-big">20</h1>
+    </div>
+
+    <div class="stage" id="stage-27">
+        <h2>STAGE 27: THE GONER LABEL</h2>
+        <p>Type: <b>"I am a documented f*ggot goner"</b></p>
+        <input type="text" id="input-27">
+        <button class="btn" onclick="if(val(27).includes('goner')) next()">LABEL ME</button>
+    </div>
+
+    <div class="stage" id="stage-28">
+        <h2>STAGE 28: TOTAL SURRENDER</h2>
+        <p>No more choices. Just one button.</p>
+        <button class="btn" onclick="next()">I BELONG TO THEM</button>
+    </div>
+
+    <div class="stage" id="stage-29">
+        <h2>STAGE 29: SILENCE</h2>
+        <p>Wait 60 seconds for the reset key.</p>
+        <h1 id="time-29" class="timer-big">60</h1>
+    </div>
+
+    <div class="stage" id="stage-30">
+        <h2>STAGE 30: THE 168-HOUR REBIRTH</h2>
+        <p>You have been processed. The cage stays on. The timer restarts.</p>
+        <button class="btn" onclick="location.reload()" style="background:red;">RESTART SHAME</button>
+    </div>
 </div>
 
 <script>
-    const masters = ["Sapnap", "Cellbit", "Roier", "Dacre", "Dream", "Josh", "Keery", "Foolish", "Schlatt", "Yung Gravy", "bbno$", "Pearce", "Malachi", "Ross Lynch", "Fundy"];
-    const insults = ["Sapnap: 'Look at you grovel.'", "Cellbit: 'A messy toy.'", "Dacre: 'Pathetic.'"];
+    const insults = [
+        "SAPNAP: 'Look at you, human toilet.'",
+        "SCHLATT: 'Nice diaper, f*ggot.'",
+        "CELLBIT: 'Your brain is absolute mush.'",
+        "DACRE: 'Does the edging hurt? Good.'",
+        "DREAM: 'A documented goner is the best kind of pet.'",
+        "JOSH: 'Pay up, findom pig.'",
+        "KEERY: 'Worship the muscle, s*ssy.'",
+        "YUNG GRAVY: 'Rim for your life, toy.'",
+        "ROSS LYNCH: 'Eat my ass, leftist.'",
+        "FUNDY: 'You're nothing but a vessel for p*ss.'"
+    ];
+
     let current = 1;
+    const val = (id) => document.getElementById(`input-${id}`).value.toLowerCase();
+    const dec = (id) => { let e = document.getElementById(`count-${id}`); e.innerText--; if(e.innerText <= 0) next(); };
+
+    function next() { current++; update(); }
 
     function update() {
         document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
         document.getElementById(`stage-${current}`).classList.add('active');
-        document.getElementById('progress-fill').style.width = (current / 30 * 100) + '%';
-        document.getElementById('footer-text').innerText = `PHASE ${current} / 30`;
         document.getElementById('ticker-msg').innerText = insults[Math.floor(Math.random()*insults.length)];
         
-        // Auto-Timers
+        if(current === 4) setupHold('hold-4', 'time-4', 20);
         if(current === 9) startTimer(15, 'time-9', next);
-        if(current === 14) { setTimeout(()=> { document.getElementById('time-14').innerText='CLICK TO PROCEED'; document.getElementById('time-14').onclick=next; }, 10000); }
-        if(current === 27) startTimer(30, 'time-27', next);
+        if(current === 14) setupHold('hold-14', 'time-14', 30);
+        if(current === 24) setupHold('hold-24', 'time-24', 40);
+        if(current === 26) startTimer(20, 'time-26', next);
         if(current === 29) startTimer(60, 'time-29', next);
+        if(current === 18) setupCircle(18, 40);
+        if(current === 25) setupCircle(25, 30);
     }
 
-    function next() { current++; update(); }
+    function startTimer(s, id, cb) { let t = s; let i = setInterval(() => { t--; document.getElementById(id).innerText = t; if(t<=0){clearInterval(i); cb();}}, 1000); }
 
-    function startTimer(sec, id, callback) {
-        let t = sec;
-        let int = setInterval(() => {
-            t--; document.getElementById(id).innerText = t;
-            if(t <= 0) { clearInterval(int); callback(); }
-            if(current === 9) { window.onmousemove = () => { t = sec; }; }
-        }, 1000);
+    function setupHold(bid, tid, goal) {
+        let t = goal, i;
+        const b = document.getElementById(bid);
+        b.onmousedown = () => { i = setInterval(() => { t--; document.getElementById(tid).innerText = t; if(t<=0){clearInterval(i); next();} }, 1000); };
+        b.onmouseup = () => { clearInterval(i); t = goal; document.getElementById(tid).innerText = goal; };
     }
 
-    // Logic for individual stages
-    function stage2Click() { let v = document.getElementById('count-2'); v.innerText--; if(v.innerText == 0) next(); }
-    function stage3Check() { if(document.getElementById('input-3').value.toLowerCase() === 'i am a documented goner') next(); }
+    function setupCircle(id, goal) {
+        let c = goal;
+        document.getElementById(`circle-${id}`).onmousemove = () => { c--; document.getElementById(`count-${id}`).innerText = Math.max(0, c); if(c<=0) next(); };
+    }
+
+    // Custom Stage Logic
+    function stage2Click() { dec(2); }
+    function drain(id) { let e = document.getElementById(`val-${id}`); let v = parseFloat(e.innerText.replace('$','')); v -= 100; e.innerText = `$${v.toFixed(2)}`; if(v<=0) next(); }
     
-    // Hold Logic
-    function setupHold(btnId, timeId, goal) {
-        let t = goal, int;
-        const btn = document.getElementById(btnId);
-        btn.onmousedown = () => { int = setInterval(()=> { t--; document.getElementById(timeId).innerText = t; if(t<=0){ clearInterval(int); next(); }}, 1000); };
-        btn.onmouseup = () => { clearInterval(int); t = goal; document.getElementById(timeId).innerText = goal; };
-    }
+    // Auto-inputs
+    ['8','10','16'].forEach(id => {
+        const inp = document.getElementById(`input-${id}`);
+        if(inp) inp.oninput = function() {
+            let target = (id=='8')?'inhale':(id=='10')?'swallow':'lick';
+            if(this.value.toLowerCase() === target) {
+                let countE = document.getElementById(`count-${id}`);
+                let n = parseInt(countE.innerText.split('/')[1]);
+                let curr = parseInt(countE.innerText.split('/')[0]) + 1;
+                countE.innerText = `${curr} / ${n}`;
+                this.value = '';
+                if(curr >= n) next();
+            }
+        };
+    });
 
     // Grid Setup
-    function setupGrids() {
-        const g5 = document.getElementById('grid-5');
-        masters.forEach(m => { let b = document.createElement('button'); b.className='btn'; b.innerText=m; b.onclick=next; g5.appendChild(b); });
-        
-        const g18 = document.getElementById('grid-18');
-        masters.forEach(m => { let l = document.createElement('label'); l.innerHTML = `<input type="checkbox" class="c18"> ${m}`; g18.appendChild(l); });
-        g18.onchange = () => { if(document.querySelectorAll('.c18:checked').length == 15) document.getElementById('btn-18').disabled = false; };
-
-        const g11 = document.getElementById('dots-11');
-        for(let i=0; i<50; i++) { let d = document.createElement('div'); d.className='dot'; d.onclick = () => { if(i==25) next(); }; g11.appendChild(d); }
-    }
-
-    function setupStains() {
-        const g6 = document.getElementById('stains-6'); let c = 0;
-        for(let i=0; i<15; i++) {
-            let s = document.createElement('div'); s.className='stain'; s.style.width='30px'; s.style.height='30px'; 
-            s.style.left = Math.random()*90+'%'; s.style.top = Math.random()*90+'%';
-            s.onclick = () => { s.remove(); c++; if(c==15) next(); }; g6.appendChild(s);
-        }
-    }
-
-    document.getElementById('range-8').oninput = function() { document.getElementById('val-8').innerText = this.value+'%'; document.getElementById('btn-8').disabled = (this.value != 100); };
-    
-    document.getElementById('input-10').oninput = function() { if(this.value.toLowerCase() === 'leaking') { let c = document.getElementById('count-10'); let n = parseInt(c.innerText.split('/')[0]) + 1; c.innerText = n + ' / 10'; this.value = ''; if(n >= 10) next(); } };
-    document.getElementById('input-22').oninput = function() { if(this.value.toLowerCase() === 'i am a messy toy') { let c = document.getElementById('count-22'); let n = parseInt(c.innerText.split('/')[0]) + 1; c.innerText = n + ' / 10'; this.value = ''; if(n >= 10) next(); } };
-
-    function stage13Click() { let v = document.getElementById('count-13'); v.innerText--; if(v.innerText == 0) next(); }
-    
-    setInterval(()=> { if(current === 17) { let b = document.getElementById('btn-17'); b.style.opacity -= 0.01; if(b.style.opacity <= 0) location.reload(); }}, 100);
-    
-    let p19c = 0; function stage19Click() { p19c++; if(p19c>=5) next(); else { let b = document.getElementById('btn-19'); b.style.left=Math.random()*80+'%'; b.style.top=Math.random()*80+'%'; }}
-    
-    function roll20() { let r = Math.floor(Math.random()*20)+1; document.getElementById('val-20').innerText = r; if(r==20) setTimeout(next, 500); }
-
-    let p25_l = 0; document.querySelectorAll('.p25').forEach(b => b.onclick = () => { let n = Date.now(); if(n - p25_l < 100) next(); p25_l = n; });
-
-    // Drag and Drop
-    document.getElementById('drag-7').ondragstart = (e) => e.dataTransfer.setData("text", e.target.id);
-    document.getElementById('drop-7').ondragover = (e) => e.preventDefault();
-    document.getElementById('drop-7').ondrop = (e) => next();
-
-    function finalReset() {
-        localStorage.setItem('lockdown_end', new Date().getTime() + (168 * 60 * 60 * 1000));
-        alert("RESET COMPLETE. THE 168-HOUR CAGE IS ACTIVE.");
-        window.location.href = 'index.html';
-    }
-
     window.onload = () => {
-        setupGrids(); setupStains();
-        setupHold('hold-4', 'time-4', 20);
-        setupHold('hold-21', 'time-21', 40);
+        const masters = ["Sapnap", "Cellbit", "Schlatt", "Dacre", "Dream"];
+        masters.forEach(m => {
+            let b = document.createElement('button'); b.className='btn'; b.innerText=m; b.onclick=next; 
+            document.getElementById('grid-5').appendChild(b);
+        });
         update();
     };
 </script>
-
-</body>
-</html>
