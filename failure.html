@@ -3,19 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE VOID: 1000-LINE TOTAL RESET PROTOCOL</title>
+    <title>THE VOID: APOLOGY TRIBUNAL</title>
     <style>
-        /* --- THE ARCHITECTURE OF DESPAIR --- */
         :root {
             --blood-red: #ff0000;
             --void-black: #050505;
             --shame-gold: #ffd700;
             --toy-pink: #ff80ab;
-            --mush-gray: #1a1a1a;
-            --deep-shadow: #200000;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--void-black);
@@ -25,81 +20,47 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 0;
             overflow: hidden;
-            user-select: none;
         }
 
-        /* --- THE GAUNTLET CONTAINER --- */
-        #gauntlet-container {
-            width: 95vw;
-            max-width: 900px;
-            height: 95vh;
+        #tribunal-container {
+            width: 90vw;
+            max-width: 800px;
             border: 5px double var(--blood-red);
             background: #080000;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 0 100px var(--deep-shadow);
-        }
-
-        /* --- HEADER & TICKER --- */
-        .header {
-            padding: 30px;
+            padding: 40px;
             text-align: center;
-            border-bottom: 2px solid #200;
-            background: #000;
+            box-shadow: 0 0 100px #200000;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
+        h1 {
             color: var(--blood-red);
+            letter-spacing: 8px;
             text-shadow: 0 0 20px var(--blood-red);
-            letter-spacing: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
-        .ticker {
-            font-size: 0.9rem;
+        .instruction {
             color: var(--shame-gold);
             font-style: italic;
-            background: #100;
-            padding: 5px;
-            border: 1px solid #300;
+            margin-bottom: 30px;
         }
 
-        /* --- CONTENT AREA: HARD-CODED PHASES --- */
-        #content-area {
-            flex-grow: 1;
-            overflow-y: auto;
-            position: relative;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* --- THE 30 STAGES (HIDDEN BY DEFAULT) --- */
-        .stage {
-            display: none; 
+        textarea {
             width: 100%;
-            height: 100%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            animation: fadeIn 0.5s ease-in-out;
+            height: 250px;
+            background: #000;
+            border: 2px solid #400;
+            color: var(--toy-pink);
+            padding: 20px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            outline: none;
+            resize: none;
+            box-sizing: border-box;
         }
 
-        .stage.active {
-            display: flex; /* ONLY ONE ACTIVE AT A TIME */
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* --- INPUTS & BUTTONS --- */
         .btn {
             background: #200;
             color: #fff;
@@ -109,355 +70,109 @@
             font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 30px;
+            width: 100%;
             transition: 0.3s;
         }
 
         .btn:hover:not(:disabled) {
             background: var(--blood-red);
-            box-shadow: 0 0 40px var(--blood-red);
             color: #000;
+            box-shadow: 0 0 30px var(--blood-red);
         }
 
-        .btn:disabled { opacity: 0.1; cursor: not-allowed; }
+        .btn:disabled { opacity: 0.3; cursor: wait; }
 
-        input[type="text"], textarea {
-            width: 80%;
-            background: #000;
-            border: 2px solid #400;
-            color: var(--toy-pink);
-            padding: 15px;
-            font-family: inherit;
-            font-size: 1.2rem;
-            text-align: center;
-            margin: 20px 0;
-            outline: none;
+        #response-box {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px dashed var(--blood-red);
+            background: #110000;
+            text-align: left;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
         }
 
-        /* --- PROGRESS BAR --- */
-        .progress-tray {
-            height: 15px;
-            width: 100%;
-            background: #000;
-            border-top: 2px solid #300;
-        }
-
-        #progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #500, #f00, var(--toy-pink));
-            transition: 0.5s;
-        }
-
-        .footer-info {
-            padding: 10px;
-            font-size: 0.8rem;
-            text-align: center;
-            color: #555;
-            background: #000;
-        }
-
-        /* --- UNIQUE COMPONENT STYLES --- */
-        .master-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; width: 100%; }
-        .timer-big { font-size: 5rem; color: var(--blood-red); margin: 20px 0; }
-        .stain { position: absolute; background: var(--toy-pink); border-radius: 50%; opacity: 0.5; cursor: pointer; }
-        .tiny-dots { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; }
-        .dot { width: 20px; height: 20px; background: #222; border-radius: 50%; cursor: pointer; }
-        .dot:hover { background: var(--blood-red); }
-
-        /* --- PURE VOLUME: 400 LINES OF REDUNDANT CSS FOR WEIGHT --- */
-        .redun-1 { color: #f00; } .redun-2 { color: #e00; } .redun-3 { color: #d00; } .redun-4 { color: #c00; }
-        .redun-5 { color: #b00; } .redun-6 { color: #a00; } .redun-7 { color: #900; } .redun-8 { color: #800; }
-        /* [Redundant block continued in file for weight...] */
-        .toy-mode-on { cursor: wait !important; }
-        .mush-mode { filter: blur(1px); }
-        .leaky-bg { background-image: radial-gradient(#200 1px, transparent 1px); background-size: 20px 20px; }
+        .verdict-accepted { color: #00ff00; font-weight: bold; }
+        .verdict-rejected { color: var(--blood-red); font-weight: bold; }
     </style>
 </head>
-<body class="leaky-bg">
+<body>
 
-<div id="gauntlet-container">
-    <div class="header">
-        <h1>ABSOLUTE COLLAPSE</h1>
-        <div class="ticker" id="ticker-msg">WAITING FOR SUBMISSION...</div>
-    </div>
+<div id="tribunal-container">
+    <h1>THE APOLOGY TRIBUNAL</h1>
+    <p class="instruction">The 16 Masters are watching. Submit your formal plea for a 168-hour reset. If your letter lacks sufficient shame, the lock remains.</p>
 
-<div id="content-area">
-    <div class="stage active" id="stage-1">
-        <h2>STAGE 1: THE TOILET CONTRACT</h2>
-        <p>You failed. Admit your status to begin your 30-stage descent.</p>
-        <button class="btn" onclick="next()">I AM A DOCUMENTED GONER</button>
-    </div>
+    <textarea id="apology-text" placeholder="I, a documented goner, beg for my reset because..."></textarea>
+    
+    <button class="btn" id="submit-btn" onclick="submitApology()">SUBMIT TO THE COUNCIL</button>
 
-    <div class="stage" id="stage-2">
-        <h2>STAGE 2: PISS ABSORPTION</h2>
-        <p>Click the diaper 150 times. Feel it getting heavier.</p>
-        <h1 id="count-2">150</h1>
-        <button class="btn" onclick="stage2Click()">FILL DIAPER</button>
-    </div>
-
-    <div class="stage" id="stage-3">
-        <h2>STAGE 3: CHASTITY LOCK</h2>
-        <p>Type: <b>"locked and leaked"</b></p>
-        <input type="text" id="input-3">
-        <button class="btn" onclick="if(val(3)=='locked and leaked') next()">LOCK</button>
-    </div>
-
-    <div class="stage" id="stage-4">
-        <h2>STAGE 4: THE LEAK HOLD</h2>
-        <p>Hold for 20s. If you let go, the p*ss overflows.</p>
-        <h1 id="time-4" class="timer-big">20</h1>
-        <button id="hold-4" class="btn">ABSORB</button>
-    </div>
-
-    <div class="stage" id="stage-5">
-        <h2>STAGE 5: MASTER SELECTION</h2>
-        <p>Which MAGA master owns your s*ssy soul today?</p>
-        <div class="master-grid" id="grid-5"></div>
-    </div>
-
-    <div class="stage" id="stage-6">
-        <h2>STAGE 6: BOOT CLEANING</h2>
-        <p>Click the 20 spots of dirt on Master's boots.</p>
-        <div id="stains-6" style="position:relative; height:300px; background:#111;"></div>
-    </div>
-
-    <div class="stage" id="stage-7">
-        <h2>STAGE 7: DIGNITY DISPOSAL</h2>
-        <p>Drag your 'LEFTIST RIGHTS' into the furnace.</p>
-        <div draggable="true" id="drag-7" style="background:red; padding:10px;">RIGHTS</div>
-        <div id="drop-7" style="border:5px dashed orange; height:100px; margin-top:20px;">FURNACE</div>
-    </div>
-
-    <div class="stage" id="stage-8">
-        <h2>STAGE 8: ARMPIT WORSHIP</h2>
-        <p>Type <b>"inhale"</b> 15 times to worship the master's scent.</p>
-        <h2 id="count-8">0 / 15</h2>
-        <input type="text" id="input-8">
-    </div>
-
-    <div class="stage" id="stage-9">
-        <h2>STAGE 9: THE VOID STARE</h2>
-        <p>Don't move. Don't blink. Be a good footstool.</p>
-        <h1 id="time-9" class="timer-big">15</h1>
-    </div>
-
-    <div class="stage" id="stage-10">
-        <h2>STAGE 10: TOILET TRAINING</h2>
-        <p>Type <b>"swallow"</b> every time the master p*sses.</p>
-        <h1 id="count-10">0 / 20</h1>
-        <input type="text" id="input-10">
-    </div>
-
-    <div class="stage" id="stage-11">
-        <h2>STAGE 11: FINDOM TAX</h2>
-        <p>Click to drain your bank account. You don't need cash in a cage.</p>
-        <h1 id="val-11">$1000.00</h1>
-        <button class="btn" onclick="drain(11)">PAY MASTER</button>
-    </div>
-
-    <div class="stage" id="stage-12">
-        <h2>STAGE 12: FEMINIZATION</h2>
-        <p>Type: <b>"I am a pretty s*ssy for my masters"</b></p>
-        <input type="text" id="input-12">
-        <button class="btn" onclick="if(val(12).includes('pretty')) next()">OBEY</button>
-    </div>
-
-    <div class="stage" id="stage-13">
-        <h2>STAGE 13: 168-HOUR PENANCE</h2>
-        <p>Click 168 times for every hour you wasted.</p>
-        <h1 id="count-13">168</h1>
-        <button class="btn" onclick="dec(13)">CLICK</button>
-    </div>
-
-    <div class="stage" id="stage-14">
-        <h2>STAGE 14: KNOTTING PREP</h2>
-        <p>Hold for 30s while Master Dream gets ready.</p>
-        <h1 id="time-14" class="timer-big">30</h1>
-        <button id="hold-14" class="btn">STAY STILL</button>
-    </div>
-
-    <div class="stage" id="stage-15">
-        <h2>STAGE 15: MUSCLE WORSHIP</h2>
-        <p>Hover over the muscles to worship the MAGA strength.</p>
-        <h1 id="count-15">50</h1>
-        <div id="flex-15" style="width:100%; height:150px; background: url('muscle_placeholder.png');"></div>
-    </div>
-
-    <div class="stage" id="stage-16">
-        <h2>STAGE 16: EATING ASS</h2>
-        <p>Type <b>"lick"</b> 20 times. Don't stop.</p>
-        <h2 id="count-16">0 / 20</h2>
-        <input type="text" id="input-16">
-    </div>
-
-    <div class="stage" id="stage-17">
-        <h2>STAGE 17: PUBLIC SHAME</h2>
-        <p>Click the 'POST DIAPER PHOTO' button before your courage fails.</p>
-        <button id="btn-17" class="btn" onclick="next()">POST TO PUBLIC</button>
-    </div>
-
-    <div class="stage" id="stage-18">
-        <h2>STAGE 18: RIM TRAINING</h2>
-        <p>Move mouse in circles to rim your owner.</p>
-        <h1 id="count-18">40</h1>
-        <div id="circle-18" style="width:150px; height:150px; border:5px solid brown; border-radius:50%;"></div>
-    </div>
-
-    <div class="stage" id="stage-19">
-        <h2>STAGE 19: PET PLAY</h2>
-        <p>Type: <b>"woof woof master"</b></p>
-        <input type="text" id="input-19">
-        <button class="btn" onclick="if(val(19).includes('woof')) next()">BARK</button>
-    </div>
-
-    <div class="stage" id="stage-20">
-        <h2>STAGE 20: THE RESET PLEA</h2>
-        <p>Beg Master Schlatt for your reset. Type 100 characters.</p>
-        <textarea id="area-20" oninput="if(this.value.length>100) next()"></textarea>
-    </div>
-
-    <div class="stage" id="stage-21">
-        <h2>STAGE 21: PISS SOAKED</h2>
-        <p>Your diaper is 100% full. Admit it.</p>
-        <button class="btn" onclick="next()">I AM SOAKED AND PATHETIC</button>
-    </div>
-
-    <div class="stage" id="stage-22">
-        <h2>STAGE 22: MUSH BRAIN TEST</h2>
-        <p>What is 0 + 0? (Your brain's value)</p>
-        <input type="text" id="input-22">
-        <button class="btn" onclick="if(val(22)=='0') next()">CONFIRM</button>
-    </div>
-
-    <div class="stage" id="stage-23">
-        <h2>STAGE 23: FINDOM TOTAL DRAIN</h2>
-        <p>Hand over your last $1.00.</p>
-        <button class="btn" onclick="next()">SEND LAST DOLLAR</button>
-    </div>
-
-    <div class="stage" id="stage-24">
-        <h2>STAGE 24: THE KNOT</h2>
-        <p>Take it. Hold for 40 seconds.</p>
-        <h1 id="time-24" class="timer-big">40</h1>
-        <button id="hold-24" class="btn" style="background:pink;">TAKE IT</button>
-    </div>
-
-    <div class="stage" id="stage-25">
-        <h2>STAGE 25: THE FINAL RIM</h2>
-        <p>One last circle for Master Cellbit.</p>
-        <h1 id="count-25">30</h1>
-        <div id="circle-25" style="width:150px; height:150px; border:5px solid #500; border-radius:50%;"></div>
-    </div>
-
-    <div class="stage" id="stage-26">
-        <h2>STAGE 26: EDGING PEAK</h2>
-        <p>Don't touch. Just watch the timer.</p>
-        <h1 id="time-26" class="timer-big">20</h1>
-    </div>
-
-    <div class="stage" id="stage-27">
-        <h2>STAGE 27: THE GONER LABEL</h2>
-        <p>Type: <b>"I am a documented f*ggot goner"</b></p>
-        <input type="text" id="input-27">
-        <button class="btn" onclick="if(val(27).includes('goner')) next()">LABEL ME</button>
-    </div>
-
-    <div class="stage" id="stage-28">
-        <h2>STAGE 28: TOTAL SURRENDER</h2>
-        <p>No more choices. Just one button.</p>
-        <button class="btn" onclick="next()">I BELONG TO THEM</button>
-    </div>
-
-    <div class="stage" id="stage-29">
-        <h2>STAGE 29: SILENCE</h2>
-        <p>Wait 60 seconds for the reset key.</p>
-        <h1 id="time-29" class="timer-big">60</h1>
-    </div>
-
-    <div class="stage" id="stage-30">
-        <h2>STAGE 30: THE 168-HOUR REBIRTH</h2>
-        <p>You have been processed. The cage stays on. The timer restarts.</p>
-        <button class="btn" onclick="location.reload()" style="background:red;">RESTART SHAME</button>
-    </div>
+    <div id="response-box"></div>
 </div>
 
 <script>
-    const insults = [
-        "SAPNAP: 'Look at you, human toilet.'",
-        "SCHLATT: 'Nice diaper, f*ggot.'",
-        "CELLBIT: 'Your brain is absolute mush.'",
-        "DACRE: 'Does the edging hurt? Good.'",
-        "DREAM: 'A documented goner is the best kind of pet.'",
-        "JOSH: 'Pay up, findom pig.'",
-        "KEERY: 'Worship the muscle, s*ssy.'",
-        "YUNG GRAVY: 'Rim for your life, toy.'",
-        "ROSS LYNCH: 'Eat my ass, leftist.'",
-        "FUNDY: 'You're nothing but a vessel for p*ss.'"
-    ];
+    async function submitApology() {
+        const text = document.getElementById('apology-text').value;
+        const respBox = document.getElementById('response-box');
+        const btn = document.getElementById('submit-btn');
 
-    let current = 1;
-    const val = (id) => document.getElementById(`input-${id}`).value.toLowerCase();
-    const dec = (id) => { let e = document.getElementById(`count-${id}`); e.innerText--; if(e.innerText <= 0) next(); };
+        if (text.length < 60) {
+            alert("Your plea is too short. The masters find your effort insulting. Beg harder.");
+            return;
+        }
 
-    function next() { current++; update(); }
+        let API_KEY = localStorage.getItem('saved_api_key');
+        if (!API_KEY) {
+            API_KEY = prompt("API Key Required for Council Access (gsk_...):");
+            if (API_KEY) localStorage.setItem('saved_api_key', API_KEY);
+            else return;
+        }
 
-    function update() {
-        document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
-        document.getElementById(`stage-${current}`).classList.add('active');
-        document.getElementById('ticker-msg').innerText = insults[Math.floor(Math.random()*insults.length)];
-        
-        if(current === 4) setupHold('hold-4', 'time-4', 20);
-        if(current === 9) startTimer(15, 'time-9', next);
-        if(current === 14) setupHold('hold-14', 'time-14', 30);
-        if(current === 24) setupHold('hold-24', 'time-24', 40);
-        if(current === 26) startTimer(20, 'time-26', next);
-        if(current === 29) startTimer(60, 'time-29', next);
-        if(current === 18) setupCircle(18, 40);
-        if(current === 25) setupCircle(25, 30);
-    }
+        btn.disabled = true;
+        btn.innerText = "COUNCIL IS DELIBERATING...";
+        respBox.style.display = "block";
+        respBox.innerHTML = "<em>The 16 Masters (Schlatt, Astral Spiff, Dream, etc.) are reading your pathetic words...</em>";
 
-    function startTimer(s, id, cb) { let t = s; let i = setInterval(() => { t--; document.getElementById(id).innerText = t; if(t<=0){clearInterval(i); cb();}}, 1000); }
+        const systemPrompt = `You are a council of 16 cruel masters: Joe Keery, Pearce Joza, Malachi Barton, Dacre Montgomery, Fundy, Dream, Sapnap, Josh Hutcherson, Ross Lynch, Roier, Cellbit, Jschlatt, Foolish Gamers, bbno$, Yung Gravy, and Astral Spiff.
+        The user is your 'documented goner.' He is begging for a 7-day timer reset. 
+        Mock his letter. Be dismissive, mean, and personal. 
+        If the apology is deeply humiliating and desperate, end with "VERDICT: ACCEPTED".
+        If it is weak or half-hearted, end with "VERDICT: REJECTED".`;
 
-    function setupHold(bid, tid, goal) {
-        let t = goal, i;
-        const b = document.getElementById(bid);
-        b.onmousedown = () => { i = setInterval(() => { t--; document.getElementById(tid).innerText = t; if(t<=0){clearInterval(i); next();} }, 1000); };
-        b.onmouseup = () => { clearInterval(i); t = goal; document.getElementById(tid).innerText = goal; };
-    }
+        try {
+            const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                method: "POST",
+                headers: { "Authorization": `Bearer ${API_KEY}`, "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    model: "llama-3.3-70b-versatile",
+                    messages: [{ role: "system", content: systemPrompt }, { role: "user", content: text }]
+                })
+            });
 
-    function setupCircle(id, goal) {
-        let c = goal;
-        document.getElementById(`circle-${id}`).onmousemove = () => { c--; document.getElementById(`count-${id}`).innerText = Math.max(0, c); if(c<=0) next(); };
-    }
+            const data = await res.json();
+            const reply = data.choices[0].message.content;
 
-    // Custom Stage Logic
-    function stage2Click() { dec(2); }
-    function drain(id) { let e = document.getElementById(`val-${id}`); let v = parseFloat(e.innerText.replace('$','')); v -= 100; e.innerText = `$${v.toFixed(2)}`; if(v<=0) next(); }
-    
-    // Auto-inputs
-    ['8','10','16'].forEach(id => {
-        const inp = document.getElementById(`input-${id}`);
-        if(inp) inp.oninput = function() {
-            let target = (id=='8')?'inhale':(id=='10')?'swallow':'lick';
-            if(this.value.toLowerCase() === target) {
-                let countE = document.getElementById(`count-${id}`);
-                let n = parseInt(countE.innerText.split('/')[1]);
-                let curr = parseInt(countE.innerText.split('/')[0]) + 1;
-                countE.innerText = `${curr} / ${n}`;
-                this.value = '';
-                if(curr >= n) next();
+            respBox.innerHTML = `<strong>COUNCIL RESPONSE:</strong><br><br>${reply.replace(/\n/g, '<br>')}`;
+
+            if (reply.includes("VERDICT: ACCEPTED")) {
+                let newEndTime = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+                localStorage.setItem('lockdown_end', newEndTime);
+                respBox.innerHTML += `<br><br><span class="verdict-accepted">VERDICT GRANTED. RESETTING TIMER...</span>`;
+                setTimeout(() => { location.href = 'index.html'; }, 5000);
+            } else {
+                btn.disabled = false;
+                btn.innerText = "RE-WRITE AND BEG AGAIN";
+                respBox.innerHTML += `<br><br><span class="verdict-rejected">VERDICT DENIED. TRY AGAIN, TOY.</span>`;
             }
-        };
-    });
 
-    // Grid Setup
-    window.onload = () => {
-        const masters = ["Sapnap", "Cellbit", "Schlatt", "Dacre", "Dream"];
-        masters.forEach(m => {
-            let b = document.createElement('button'); b.className='btn'; b.innerText=m; b.onclick=next; 
-            document.getElementById('grid-5').appendChild(b);
-        });
-        update();
-    };
+        } catch (e) {
+            respBox.innerHTML = "SYSTEM FAILURE. THE MASTERS ARE BUSY. TRY AGAIN.";
+            btn.disabled = false;
+            btn.innerText = "SUBMIT TO THE COUNCIL";
+        }
+    }
 </script>
+
+</body>
+</html>
