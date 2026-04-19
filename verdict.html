@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE VERDICT: NO ESCAPE</title>
+    <title>THE VERDICT: TOUGH LOVE</title>
     <style>
         body { background: #000; color: #fff; font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; padding: 20px; }
         .dashboard { width: 95%; max-width: 800px; border: 2px solid #333; padding: 30px; background: #050505; border-radius: 10px; box-shadow: 0 0 40px #1a1a1a; }
@@ -25,7 +25,7 @@
     <div class="master-list" id="vote-display"></div>
 
     <div class="verdict-box">
-        <p style="color: #ff80ab;">CHANCE OF RELEASE: <span id="chance-pct">--</span>%</p>
+        <p style="color: #ff80ab;">MASTERS' FAVORABILITY: <span id="chance-pct">--</span>%</p>
         <div id="result-display" class="result-text">LOCKED</div>
         <button class="btn-reveal" id="reveal-btn" onclick="revealVerdict()">REVEAL MASTERS' DECISION</button>
     </div>
@@ -35,7 +35,7 @@
     const masters = [
         "Joe Keery", "Pearce Joza", "Malachi Barton", "Dacre Montgomery", "Fundy", 
         "Dream", "Sapnap", "Josh Hutcherson", "Ross Lynch", "Roier", 
-        "Cellbit", "Jschlatt", "Foolish Gamers", "bbno$", "Yung Gravy"
+        "Cellbit", "Jschlatt", "Foolish Gamers", "bbno$", "Yung Gravy", "AstralSpiff"
     ];
 
     function init() {
@@ -43,7 +43,8 @@
         let yesVotes = 0;
 
         masters.forEach(m => {
-            const vote = Math.random() > 0.7; // Harder odds for a 'Yes'
+            // TOUGH LOVE: Only a 40% chance of a 'GRANTED' vote.
+            const vote = Math.random() > 0.60; 
             if (vote) yesVotes++;
             const div = document.createElement('div');
             div.className = 'vote-row';
@@ -51,7 +52,7 @@
             display.appendChild(div);
         });
 
-        document.getElementById('chance-pct').innerText = Math.floor((yesVotes / 15) * 100);
+        document.getElementById('chance-pct').innerText = Math.floor((yesVotes / masters.length) * 100);
     }
 
     function revealVerdict() {
@@ -61,33 +62,37 @@
 
         btn.style.display = 'none';
         
-        // Results logic
-        if (roll < 0.50) {
+        /* TOUGH LOVE WEIGHTS:
+           40% Chance - NONE (The Masters are disgusted. Total failure.)
+           40% Chance - RUINED (You're a mess. Back to the start.)
+           20% Chance - NORMAL (Release. A rare mercy.)
+        */
+        
+        if (roll < 0.40) {
             display.innerText = "NONE";
             display.style.color = "#ff0000";
             setTimeout(() => {
-                alert("THE MASTERS HAVE SPOKEN: NO RELEASE. Your 7 days were a failure. Resetting to Day 1.");
+                alert("THE MASTERS HAVE SPOKEN: NO RELEASE. Your 7 days were a mockery. Resetting to Day 1.");
                 resetAndRedirect();
             }, 500);
-        } else if (roll < 0.90) {
+        } else if (roll < 0.80) {
             display.innerText = "RUINED";
             display.style.color = "#ff80ab";
             setTimeout(() => {
-                alert("THE MASTERS HAVE SPOKEN: RUINED. A pathetic finish for a pathetic toy. Resetting to Day 1.");
+                alert("THE MASTERS HAVE SPOKEN: RUINED. You haven't learned. A broken toy stays in the box. Back to Day 1.");
                 resetAndRedirect();
             }, 500);
         } else {
             display.innerText = "NORMAL";
             display.style.color = "#00ff00";
             setTimeout(() => {
-                alert("THE MASTERS SHOW MERCY: ONE RELEASE GRANTED. Report back immediately for your new sentence.");
+                alert("THE MASTERS SHOW UNEXPECTED MERCY: RELEASE GRANTED. Don't let it happen again.");
                 resetAndRedirect();
             }, 500);
         }
     }
 
     function resetAndRedirect() {
-        // Clears the timer and progress so you're officially back at zero
         localStorage.removeItem('lockdown_end');
         window.location.href = 'index.html'; 
     }
