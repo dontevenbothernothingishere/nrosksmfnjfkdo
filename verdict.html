@@ -136,33 +136,60 @@
         } catch (e) { return "The Masters are too disgusted to speak."; }
     }
 
-    function finalizeVerdict() {
-        const box = document.getElementById('final-box');
-        const display = document.getElementById('result-display');
-        const countTxt = document.getElementById('final-count');
-        
-        box.style.display = 'block';
-        countTxt.innerText = `${yesVotes}/16`;
+   function finalizeVerdict() {
+    const box = document.getElementById('final-box');
+    const display = document.getElementById('result-display');
+    const countTxt = document.getElementById('final-count');
+    
+    box.style.display = 'block';
+    countTxt.innerText = `${yesVotes}/16`;
 
-        const roll = Math.random();
-        // Weighted logic from your tough love script
-        if (roll < 0.40) {
-            display.innerText = "NONE";
-            display.style.color = "#ff0000";
-        } else if (roll < 0.80) {
-            display.innerText = "RUINED";
-            display.style.color = "#ff80ab";
-        } else {
-            display.innerText = "NORMAL";
-            display.style.color = "#00ff00";
-        }
+    let finalResult = "";
+    let finalColor = "";
 
-        setTimeout(() => {
-            alert(`THE COUNCIL HAS DECIDED: ${display.innerText}. Returning to index.`);
-            localStorage.removeItem('lockdown_end');
-            window.location.href = 'index.html';
-        }, 3000);
+    // 1. Base Logic (Fair-ish)
+    if (yesVotes >= 12) {
+        finalResult = "NORMAL";
+        finalColor = "#00ff00";
+    } else if (yesVotes >= 6) {
+        finalResult = "RUINED";
+        finalColor = "#ff80ab";
+    } else {
+        finalResult = "NONE";
+        finalColor = "#ff0000";
     }
+
+    // 2. THE CRUELTY SPIKE (The "Unfair" Part)
+    // Even if you earned a NORMAL release, there's a 15% chance they change their minds.
+    if (finalResult === "NORMAL" && Math.random() < 0.15) {
+        finalResult = "RUINED";
+        finalColor = "#ff80ab";
+        console.log("CRUELTY SPIKE TRIGGERED: Masters changed their minds.");
+    }
+
+    display.innerText = finalResult;
+    display.style.color = finalColor;
+    display.style.textShadow = `0 0 20px ${finalColor}`;
+
+    setTimeout(() => {
+        if (finalResult === "NORMAL") {
+            alert(`THE COUNCIL RELUCTANTLY AGREES: ${yesVotes}/16 VOTES. You are released from the Void.`);
+            localStorage.removeItem('lockdown_end');
+        } else if (finalResult === "RUINED") {
+            alert(`SENSORY OVERLOAD: The Masters found your 7 days "messy." Verdict: RUINED. Resetting to Day 1.`);
+            resetTimer();
+        } else {
+            alert(`TOTAL DISGRACE: Only ${yesVotes} votes. The Masters have discarded you. Resetting to Day 1.`);
+            resetTimer();
+        }
+        window.location.href = 'index.html';
+    }, 5000);
+}
+
+function resetTimer() {
+    let newEndTime = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+    localStorage.setItem('lockdown_end', newEndTime);
+}
 </script>
 </body>
 </html>
